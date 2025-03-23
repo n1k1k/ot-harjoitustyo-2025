@@ -10,7 +10,7 @@ class TestMaksukortti(unittest.TestCase):
         self.assertNotEqual(self.maksukortti, None)
 
     def test_luodun_kortin_saldo_on_oikea(self):
-        self.assertEqual(self.maksukortti.saldo_euroina(), 10.0)
+        self.assertEqual(str(self.maksukortti), "Kortilla on rahaa 10.00 euroa")
 
     def test_kortille_voi_ladata_rahaa(self):
         self.maksukortti.lataa_rahaa(2000)
