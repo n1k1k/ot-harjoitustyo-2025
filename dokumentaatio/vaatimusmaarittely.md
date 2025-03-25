@@ -1,3 +1,5 @@
+# Vaatimusmäärittely
+
 ## Sovelluksen tarkoitus
 
 Sovellus mahdollistaa käyttäjälle omien kulujensa seurannan ja hallinnan. 
