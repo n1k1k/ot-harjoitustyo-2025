@@ -1,4 +1,5 @@
 from ui.login_view import LoginView
+from ui.create_user_view import CreateUserView
 
 
 class UI:
@@ -7,7 +8,6 @@ class UI:
         self._current_view = None
 
     def start(self):
-        self._root.geometry("500x300")
         self._show_login_view()
 
     def _hide_current_view(self):
@@ -19,5 +19,11 @@ class UI:
     def _show_login_view(self):
         self._hide_current_view()
 
-        self._current_view = LoginView(self._root)
+        self._current_view = LoginView(self._root, self._show_create_user_view)
+        self._current_view.pack()
+
+    def _show_create_user_view(self):
+        self._hide_current_view()
+
+        self._current_view = CreateUserView(self._root, self._show_login_view)
         self._current_view.pack()

@@ -1,14 +1,14 @@
-from tkinter import ttk, constants, Entry, Button
+from tkinter import ttk, Entry, Button
 from tkinter.ttk import Style
 
 
-class LoginView:
-    def __init__(self, root, create_user_view):
+class CreateUserView:
+    def __init__(self, root, login_view):
         self._root = root
         self._frame = None
         self._username_entry = None
         self._password_entry = None
-        self._create_user_view = create_user_view
+        self._login_view = login_view
 
         self._initialise()
 
@@ -19,7 +19,7 @@ class LoginView:
     def destroy(self):
         self._frame.destroy()
 
-    def _login(self):
+    def _create_user(self):
         username = self._username_entry.get()
         password = self._password_entry.get()
 
@@ -34,15 +34,25 @@ class LoginView:
 
         self._frame = ttk.Frame(master=self._root, style="TFrame")
 
-        login_label = ttk.Label(
+        welcome_label = ttk.Label(
             master=self._frame,
-            text="Login",
+            text="Welcome!",
             background="#333333",
             foreground="white",
             font=["Arial", 30],
         )
-        login_label.configure(anchor="center")
-        login_label.grid(row=0, column=0, columnspan=2, pady=40)
+        welcome_label.configure(anchor="center")
+        welcome_label.grid(row=0, column=0, columnspan=2, pady=(25, 5))
+
+        create_label = ttk.Label(
+            master=self._frame,
+            text="Create a new account",
+            background="#333333",
+            foreground="white",
+            font=["Arial", 22],
+        )
+        create_label.configure(anchor="center")
+        create_label.grid(row=1, column=0, columnspan=2, pady=(0, 40))
 
         # Initialise username field
         username_label = ttk.Label(
@@ -53,9 +63,9 @@ class LoginView:
             font=["Arial", 16],
         )
 
-        username_label.grid(row=1, column=0)
+        username_label.grid(row=2, column=0)
         self._username_entry = Entry(master=self._frame)
-        self._username_entry.grid(row=1, column=1, padx=5)
+        self._username_entry.grid(row=2, column=1, padx=5)
 
         # Initialise password field
         password_label = ttk.Label(
@@ -66,25 +76,25 @@ class LoginView:
             font=["Arial", 16],
         )
         # password_label.configure(style="My.TFrame")
-        password_label.grid(row=2, column=0, pady=20, padx=5)
+        password_label.grid(row=3, column=0, pady=20, padx=5)
         self._password_entry = Entry(master=self._frame, show="*")
-        self._password_entry.grid(row=2, column=1)
+        self._password_entry.grid(row=3, column=1)
 
         # Buttons
         login_button = Button(
             master=self._frame,
-            text="Login",
-            command=self._login,
-            background="#20bd65",
+            text="Back to Login",
+            command=self._login_view,
+            background="#797f85",
             foreground="black",
         )
-        login_button.grid(row=3, column=0, columnspan=2, pady=15)
+        login_button.grid(row=5, column=0, columnspan=2, pady=5)
 
         create_user_button = Button(
             master=self._frame,
             text="Create New Account",
-            command=self._create_user_view,
+            command=self._create_user,
             background="#20bd65",
             foreground="black",
         )
-        create_user_button.grid(row=4, column=0, columnspan=2, pady=5)
+        create_user_button.grid(row=4, column=0, columnspan=2, pady=(30, 20))
