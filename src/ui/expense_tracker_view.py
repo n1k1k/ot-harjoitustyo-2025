@@ -2,7 +2,7 @@ from tkinter import ttk, Button
 from tkinter.ttk import Style
 
 
-class ExpenceTrackerView:
+class ExpenseTrackerView:
     def __init__(self, root, login_view):
         self._root = root
         self._login_view = login_view

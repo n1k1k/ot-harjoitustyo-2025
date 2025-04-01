@@ -1,6 +1,6 @@
 from ui.login_view import LoginView
 from ui.create_user_view import CreateUserView
-from ui.expence_tracker_view import ExpenceTrackerView
+from ui.expense_tracker_view import ExpenseTrackerView
 
 
 class UI:
@@ -22,7 +22,7 @@ class UI:
         self._hide_current_view()
 
         self._current_view = LoginView(
-            self._root, self._show_create_user_view, self._show_expence_tracker_view
+            self._root, self._show_create_user_view, self._show_expense_tracker_view
         )
         self._current_view.pack()
 
@@ -30,12 +30,12 @@ class UI:
         self._hide_current_view()
 
         self._current_view = CreateUserView(
-            self._root, self._show_login_view, self._show_expence_tracker_view
+            self._root, self._show_login_view, self._show_expense_tracker_view
         )
         self._current_view.pack()
 
-    def _show_expence_tracker_view(self):
+    def _show_expense_tracker_view(self):
         self._hide_current_view()
 
-        self._current_view = ExpenceTrackerView(self._root, self._show_login_view)
+        self._current_view = ExpenseTrackerView(self._root, self._show_login_view)
         self._current_view.pack()

@@ -3,13 +3,13 @@ from tkinter.ttk import Style
 
 
 class LoginView:
-    def __init__(self, root, create_user_view, expence_tracker_view):
+    def __init__(self, root, create_user_view, expense_tracker_view):
         self._root = root
         self._frame = None
         self._username_entry = None
         self._password_entry = None
         self._create_user_view = create_user_view
-        self._expence_tracker_view = expence_tracker_view
+        self._expense_tracker_view = expense_tracker_view
 
         self._initialise()
 
@@ -26,7 +26,7 @@ class LoginView:
 
         # stuff
 
-        self._expence_tracker_view()
+        self._expense_tracker_view()
 
     def _initialise(self):
         self._root.geometry("600x400")
