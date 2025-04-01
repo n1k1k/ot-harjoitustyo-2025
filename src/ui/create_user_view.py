@@ -1,5 +1,6 @@
 from tkinter import ttk, Entry, Button
 from tkinter.ttk import Style
+from services.expense_service import expense_service
 
 
 class CreateUserView:
@@ -24,7 +25,11 @@ class CreateUserView:
         username = self._username_entry.get()
         password = self._password_entry.get()
 
-        # stuff
+        try:
+            expense_service.create_user(username, password)
+            self._expense_tracker_view()
+        except:
+            print("error")
 
     def _initialise(self):
         self._root.geometry("600x400")
@@ -94,7 +99,7 @@ class CreateUserView:
         create_user_button = Button(
             master=self._frame,
             text="Create New Account",
-            command=self._expense_tracker_view,
+            command=self._create_user,
             background="#20bd65",
             foreground="black",
         )

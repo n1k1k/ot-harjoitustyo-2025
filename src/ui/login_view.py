@@ -1,5 +1,6 @@
 from tkinter import ttk, Entry, Button
 from tkinter.ttk import Style
+from services.expense_service import expense_service
 
 
 class LoginView:
@@ -24,7 +25,11 @@ class LoginView:
         username = self._username_entry.get()
         password = self._password_entry.get()
 
-        # stuff
+        try:
+            expense_service.login(username, password)
+            self._expense_tracker_view()
+        except:
+            print("Error")
 
         self._expense_tracker_view()
 
