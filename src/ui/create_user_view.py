@@ -3,12 +3,13 @@ from tkinter.ttk import Style
 
 
 class CreateUserView:
-    def __init__(self, root, login_view):
+    def __init__(self, root, login_view, expence_tracker_view):
         self._root = root
         self._frame = None
         self._username_entry = None
         self._password_entry = None
         self._login_view = login_view
+        self._expence_tracker_view = expence_tracker_view
 
         self._initialise()
 
@@ -88,13 +89,13 @@ class CreateUserView:
             background="#797f85",
             foreground="black",
         )
-        login_button.grid(row=5, column=0, columnspan=2, pady=5)
+        login_button.grid(row=5, column=0, columnspan=2)
 
         create_user_button = Button(
             master=self._frame,
             text="Create New Account",
-            command=self._create_user,
+            command=self._expence_tracker_view,
             background="#20bd65",
             foreground="black",
         )
-        create_user_button.grid(row=4, column=0, columnspan=2, pady=(30, 20))
+        create_user_button.grid(row=4, column=0, columnspan=2, pady=(15, 20))
