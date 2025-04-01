@@ -42,3 +42,4 @@ poetry run invoke coverage-report
 
 - [Viikko 1](https://github.com/n1k1k/ot-harjoitustyo-2025/tree/main/laskarit/viikko1.md)
 - [Viikko 2](https://github.com/n1k1k/ot-harjoitustyo-2025/tree/main/laskarit/viikko2)
+- [Viikko 3](https://github.com/n1k1k/ot-harjoitustyo-2025/tree/55a1d42783e6bb7df431962ee193860c5bdc7f2b/laskarit/viikko3)
