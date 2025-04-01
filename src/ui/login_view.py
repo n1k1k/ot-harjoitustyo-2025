@@ -31,8 +31,6 @@ class LoginView:
         except:
             print("Error")
 
-        self._expense_tracker_view()
-
     def _initialise(self):
         self._root.geometry("600x400")
         self._root.configure(bg="#333333")

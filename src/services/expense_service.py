@@ -9,18 +9,17 @@ class ExpenseService:
         self._user_repository = user_repository
 
     def login(self, username, password):
-        user = self._user_reposiotry.find_by_username(username)
+        user = self._user_repository.find_by_username(username)
 
         if not user or user.password != password:
-            print("Invalid username or password")
-            return False
+            raise ValueError
 
         self._user = user
 
         return user
 
     def logout(self):
-        pass
+        self._user = None
 
     def create_user(self, username, password):
         check_username = self._user_repository.find_by_username(username)

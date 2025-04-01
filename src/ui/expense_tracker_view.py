@@ -1,5 +1,6 @@
 from tkinter import ttk, Button
 from tkinter.ttk import Style
+from services.expense_service import expense_service
 
 
 class ExpenseTrackerView:
@@ -15,6 +16,13 @@ class ExpenseTrackerView:
     def destroy(self):
         self._frame.destroy()
 
+    def _logout(self):
+        try:
+            expense_service.logout()
+            self._login_view()
+        except:
+            print("error")
+
     def _initialise(self):
         self._root.geometry("600x400")
         self._root.configure(bg="#333333")
@@ -27,7 +35,7 @@ class ExpenseTrackerView:
         logout_button = Button(
             master=self._frame,
             text="Log out",
-            command=self._login_view,
+            command=self._logout,
             background="#797f85",
             foreground="black",
         )
