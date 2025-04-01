@@ -31,7 +31,7 @@ def create_tables(db):
 def initialise_database():
     db = get_database_connection()
 
-    # drop_tables(db)
+    drop_tables(db)
     create_tables(db)
 
 
