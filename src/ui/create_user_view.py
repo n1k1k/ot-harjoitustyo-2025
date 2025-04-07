@@ -1,4 +1,4 @@
-from tkinter import ttk, Entry, Button
+from tkinter import ttk, Entry, Button, messagebox
 from tkinter.ttk import Style
 from services.expense_service import expense_service
 
@@ -29,7 +29,7 @@ class CreateUserView:
             expense_service.create_user(username, password)
             self._expense_tracker_view()
         except:
-            print("error")
+            messagebox.showerror("Error", "Account could not be created")
 
     def _initialise(self):
         self._root.geometry("600x400")

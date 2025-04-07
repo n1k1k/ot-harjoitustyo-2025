@@ -1,4 +1,4 @@
-from tkinter import ttk, Button
+from tkinter import ttk, Button, messagebox, Text
 from tkinter.ttk import Style
 from services.expense_service import expense_service
 
@@ -7,6 +7,9 @@ class ExpenseTrackerView:
     def __init__(self, root, login_view):
         self._root = root
         self._login_view = login_view
+        self._frame = None
+        self._add_expense_view = None
+        self._user = expense_service.get_current_user()
 
         self._initialise()
 
@@ -21,7 +24,7 @@ class ExpenseTrackerView:
             expense_service.logout()
             self._login_view()
         except:
-            print("error")
+            messagebox.showerror("Error")
 
     def _initialise(self):
         self._root.geometry("600x400")
@@ -32,6 +35,30 @@ class ExpenseTrackerView:
 
         self._frame = ttk.Frame(master=self._root, style="TFrame")
 
+        expenses = expense_service.get_expenses()
+
+        expense_list = Text(master=self._frame, height=6, width=30)
+        expense_list.grid(row=0, column=0, pady=20)
+
+        for index, row in expenses.iterrows():
+            expense_list.insert(
+                ttk.END,
+                "Date: "
+                + row["Date"]
+                + "Description: "
+                + row["Description"]
+                + "Amount :"
+                + row["Amount"],
+            )
+
+        add_expense_button = Button(
+            master=self._frame,
+            text="Add Expense",
+            background="#797f85",
+            foreground="black",
+        )
+        add_expense_button.grid(row=1, column=0, columnspan=2, pady=(20))
+
         logout_button = Button(
             master=self._frame,
             text="Log out",
@@ -39,4 +66,4 @@ class ExpenseTrackerView:
             background="#797f85",
             foreground="black",
         )
-        logout_button.grid(row=1, column=0, columnspan=2, pady=(300))
+        logout_button.grid(row=2, column=0, columnspan=2, pady=(0))
