@@ -4,9 +4,10 @@ from services.expense_service import expense_service
 
 
 class ExpenseTrackerView:
-    def __init__(self, root, login_view):
+    def __init__(self, root, login_view, create_expense_view):
         self._root = root
         self._login_view = login_view
+        self._create_expense_view = create_expense_view
         self._frame = None
         self._add_expense_view = None
         self._user = expense_service.get_current_user()
@@ -55,6 +56,7 @@ class ExpenseTrackerView:
             master=self._frame,
             text="Add Expense",
             background="#797f85",
+            command=self._create_expense_view,
             foreground="black",
         )
         add_expense_button.grid(row=1, column=0, columnspan=2, pady=(20))
