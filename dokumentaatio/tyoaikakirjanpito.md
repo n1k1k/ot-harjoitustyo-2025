@@ -6,4 +6,5 @@
 |   1.4      |  1.5 | Tietokantayhteyden luonti |
 |            |  2   | Sisään- ja uloskirjautumisen, sekä uuden käyttäjätilin luonti ominaisuuksien alustava toteutus | 
 |            |  1   | Testauksen aloitus ja invoke tehtävien toteutus | 
-| Yhteensä   | 6.5  | |
+|    7.4     |  2   | Aloittelin  kulujen lisäämiseen ja katseluun liittyvää toiminnallisuutta | 
+| Yhteensä   | 8.5  | |
