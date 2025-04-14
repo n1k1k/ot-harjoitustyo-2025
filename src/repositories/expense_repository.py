@@ -1,4 +1,3 @@
-from entities.expense import Expense
 from repositories.user_repository import user_repository
 from config import EXPENSES_PATH
 import pandas as pd
@@ -10,7 +9,7 @@ class ExpenseRepository:
 
     def all_expenses(self):
         try:
-            df = pd.read_csv(self._file_path, "r")
+            df = pd.read_csv(self._file_path)
         except Exception as e:
             data = {"Date": [], "Description": [], "Amount": [], "User": []}
 
@@ -22,6 +21,7 @@ class ExpenseRepository:
         expenses = self.all_expenses()
         username = user.username
         user_expenses = expenses.query(f"User == '{username}'")
+        print(user_expenses)
 
         return user_expenses
 
