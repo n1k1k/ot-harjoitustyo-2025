@@ -1,4 +1,4 @@
-from tkinter import ttk, Button, messagebox, CENTER, Toplevel
+from tkinter import ttk, Button, messagebox, CENTER, LEFT, RIGHT, Y, BOTH, Toplevel
 from tkinter.ttk import Style
 from tkcalendar import DateEntry
 from services.expense_service import expense_service
@@ -100,7 +100,7 @@ class ExpenseTrackerView:
         add_expense_button.grid(row=3, column=0, columnspan=2, pady=(40, 20))
 
     def _initialise(self):
-        self._root.geometry("600x400")
+        self._root.geometry("650x400")
         self._root.configure(bg="#333333")
 
         s = Style()
@@ -108,16 +108,14 @@ class ExpenseTrackerView:
 
         self._frame = ttk.Frame(master=self._root, style="TFrame")
 
-        expense_label = ttk.Label(
-            master=self._frame,
-            text="Resent Expenses",
-            background="#333333",
-            foreground="white",
-            font=["Arial", 15],
-        )
+        frame = ttk.Frame(self._frame)
 
         expense_tree = ttk.Treeview(
-            self._frame, column=("c1", "c2", "c3"), show="headings", height=10
+            frame,
+            column=("c1", "c2", "c3"),
+            show="headings",
+            height=13,
+            selectmode="browse",
         )
 
         expense_tree.column("# 1", anchor=CENTER)
@@ -125,7 +123,10 @@ class ExpenseTrackerView:
         expense_tree.column("# 2", anchor=CENTER)
         expense_tree.heading("# 2", text="Category")
         expense_tree.column("# 3", anchor=CENTER)
-        expense_tree.heading("# 3", text="Amount")
+        expense_tree.heading("# 3", text="Amount (€)")
+
+        scrollbar = ttk.Scrollbar(frame, orient="vertical", command=expense_tree.yview)
+        expense_tree.configure(yscrollcommand=scrollbar.set)
 
         expenses = expense_service.get_expenses()
 
@@ -147,13 +148,6 @@ class ExpenseTrackerView:
             foreground="black",
         )
 
-        view_all_expenses_button = Button(
-            master=self._frame,
-            text="View All Expenses",
-            background="#dde645",
-            foreground="black",
-        )
-
         logout_button = Button(
             master=self._frame,
             text="Log out",
@@ -162,8 +156,8 @@ class ExpenseTrackerView:
             foreground="black",
         )
 
-        expense_label.grid(row=0, column=1, pady=(15, 10))
-        expense_tree.grid(row=1, column=0, pady=(0, 20), columnspan=3)
+        frame.grid(row=1, column=0, columnspan=2, padx=5, pady=(20, 10))
+        expense_tree.pack(side="left")
+        scrollbar.pack(side="right", fill="y")
         add_expense_button.grid(row=2, column=0, pady=20)
-        # view_all_expenses_button.grid(row=2, column=1)
-        logout_button.grid(row=2, column=2)
+        logout_button.grid(row=2, column=1)
