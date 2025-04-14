@@ -26,11 +26,8 @@ class LoginView:
         password = self._password_entry.get()
 
         try:
-            print("test1")
             expense_service.login(username, password)
-            print("test2")
             self._expense_tracker_view()
-            print("test3")
         except:
             messagebox.showerror("Error", "Try Again")
 

@@ -20,6 +20,10 @@ class ExpenseService:
         expense_df = self._expense_repository.expenses_by_user(self._user)
         return expense_df
 
+    def add_expense(self, date, description, amount):
+        user = self.get_current_user()
+        return self._expense_repository.add_expense(date, description, amount, user)
+
     def login(self, username, password):
         user = self._user_repository.find_by_username(username)
 

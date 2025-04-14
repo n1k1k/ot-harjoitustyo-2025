@@ -26,12 +26,14 @@ class ExpenseRepository:
         return user_expenses
 
     def add_expense(self, date, description, amount, user):
+        username = user.username
+
         new_expense = pd.DataFrame(
             {
                 "Date": [date],
                 "Description": [description],
                 "Amount": [amount],
-                "User": [user],
+                "User": [username],
             }
         )
 

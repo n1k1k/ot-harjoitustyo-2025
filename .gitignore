@@ -4,3 +4,4 @@ __pycache__
 htmlcov
 database.sqlite
 database_test.sqlite
+expenses.csv
