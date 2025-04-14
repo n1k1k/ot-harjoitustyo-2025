@@ -1,4 +1,4 @@
-from tkinter import ttk, Button, messagebox, Text, END, CENTER
+from tkinter import ttk, Button, messagebox, CENTER, RIGHT
 from tkinter.ttk import Style
 from services.expense_service import expense_service
 
@@ -37,57 +37,63 @@ class ExpenseTrackerView:
         self._frame = ttk.Frame(master=self._root, style="TFrame")
 
         expenses = expense_service.get_expenses()
-        # print(expenses)
 
-        """
-
-        expense_list = Text(master=self._frame, height=10, width=60)
-        expense_list.grid(row=0, column=0, pady=20)
-
-        for index, row in expenses.iterrows():
-            expense = f"Date: {row['Date']} Description: {row['Description']} Amount: {row['Amount']}"
-            expense_list.insert(END, expense)
-        """
-
-        tree = ttk.Treeview(
-            self._frame, column=("c1", "c2", "c3"), show="headings", height=5
+        expense_label = ttk.Label(
+            master=self._frame,
+            text="Resent Expenses",
+            background="#333333",
+            foreground="white",
+            font=["Arial", 15],
         )
 
-        tree.column("# 1", anchor=CENTER)
-        tree.heading("# 1", text="Date")
+        expense_tree = ttk.Treeview(
+            self._frame, column=("c1", "c2", "c3"), show="headings", height=10
+        )
 
-        tree.column("# 2", anchor=CENTER)
-        tree.heading("# 2", text="Category")
+        expense_tree.column("# 1", anchor=CENTER)
+        expense_tree.heading("# 1", text="Date")
 
-        tree.column("# 3", anchor=CENTER)
-        tree.heading("# 3", text="Amount")
+        expense_tree.column("# 2", anchor=CENTER)
+        expense_tree.heading("# 2", text="Category")
+
+        expense_tree.column("# 3", anchor=CENTER)
+        expense_tree.heading("# 3", text="Amount")
 
         for index, row in expenses.iterrows():
             num = index + 1
             i = str(num)
-            tree.insert(
+            expense_tree.insert(
                 "",
                 "end",
                 text=i,
                 values=(row["Date"], row["Description"], row["Amount"]),
             )
 
-        tree.grid(row=0, column=0, pady=20)
-
         add_expense_button = Button(
             master=self._frame,
             text="Add Expense",
-            background="#797f85",
+            background="#20bd65",
             command=self._create_expense_view,
             foreground="black",
         )
-        add_expense_button.grid(row=1, column=0, columnspan=2, pady=(20))
+
+        view_all_expenses_button = Button(
+            master=self._frame,
+            text="View All Expenses",
+            background="#dde645",
+            foreground="black",
+        )
 
         logout_button = Button(
             master=self._frame,
             text="Log out",
             command=self._logout,
-            background="#797f85",
+            background="#d13b3b",
             foreground="black",
         )
-        logout_button.grid(row=2, column=0, columnspan=2, pady=(0))
+
+        expense_label.grid(row=0, column=1, pady=(15, 10))
+        expense_tree.grid(row=1, column=0, pady=(0, 20), columnspan=3)
+        add_expense_button.grid(row=2, column=0, pady=20)
+        view_all_expenses_button.grid(row=2, column=1)
+        logout_button.grid(row=2, column=2)
