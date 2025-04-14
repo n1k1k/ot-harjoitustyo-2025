@@ -8,5 +8,5 @@
 |            |  1   | Testauksen aloitus ja invoke tehtävien toteutus | 
 |    7.4     |  2   | Aloittelin  kulujen lisäämiseen ja katseluun liittyvää toiminnallisuutta | 
 |    14.4     |  1.5   | Tein loppuun kulujen lisäämiseen ja viimeisimpien kulujen katseluun liittyvän toiminnallisuuden | 
-|         |   1  | Käyttöliittymän koodin muutokset ja refaktorointi | 
-| Yhteensä   | 11  | |
+|         |   2  | Käyttöliittymän hienosäätö (mm. lisätty vierityspalkki) ja koodin refaktorointi | 
+| Yhteensä   | 12.5  | |

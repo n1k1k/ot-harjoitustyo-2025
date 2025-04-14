@@ -10,4 +10,4 @@ Olin kipeänä, joten valitettavasti kykenin vain hieman aloittamaan kulujen seu
 
 ## Viikko 5
 - Käyttäjä pystyy lisäämään kulun.
-- Käyttäjä näkee etusivulla viimeisimmät kulunsa.
+- Käyttäjä näkee etusivulla listan omista kuluistaan.
