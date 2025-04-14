@@ -1,4 +1,4 @@
-from tkinter import ttk, Button, messagebox, Text, END
+from tkinter import ttk, Button, messagebox, Text, END, CENTER
 from tkinter.ttk import Style
 from services.expense_service import expense_service
 
@@ -39,12 +39,40 @@ class ExpenseTrackerView:
         expenses = expense_service.get_expenses()
         # print(expenses)
 
+        """
+
         expense_list = Text(master=self._frame, height=10, width=60)
         expense_list.grid(row=0, column=0, pady=20)
 
         for index, row in expenses.iterrows():
             expense = f"Date: {row['Date']} Description: {row['Description']} Amount: {row['Amount']}"
             expense_list.insert(END, expense)
+        """
+
+        tree = ttk.Treeview(
+            self._frame, column=("c1", "c2", "c3"), show="headings", height=5
+        )
+
+        tree.column("# 1", anchor=CENTER)
+        tree.heading("# 1", text="Date")
+
+        tree.column("# 2", anchor=CENTER)
+        tree.heading("# 2", text="Category")
+
+        tree.column("# 3", anchor=CENTER)
+        tree.heading("# 3", text="Amount")
+
+        for index, row in expenses.iterrows():
+            num = index + 1
+            i = str(num)
+            tree.insert(
+                "",
+                "end",
+                text=i,
+                values=(row["Date"], row["Description"], row["Amount"]),
+            )
+
+        tree.grid(row=0, column=0, pady=20)
 
         add_expense_button = Button(
             master=self._frame,
