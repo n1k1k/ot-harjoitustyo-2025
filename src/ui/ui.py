@@ -44,9 +44,10 @@ class UI:
         self._current_view.pack()
 
     def _show_create_expense_view(self):
-        self._hide_current_view()
+        # self._hide_current_view()
 
         self._current_view = CreateExpenseView(
             self._root, self._show_expense_tracker_view
         )
-        self._current_view.pack()
+
+        # self._current_view.pack()

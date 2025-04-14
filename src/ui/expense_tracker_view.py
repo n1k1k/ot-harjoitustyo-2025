@@ -1,4 +1,4 @@
-from tkinter import ttk, Button, messagebox, CENTER, RIGHT
+from tkinter import ttk, Button, messagebox, CENTER, RIGHT, Toplevel
 from tkinter.ttk import Style
 from services.expense_service import expense_service
 
@@ -9,6 +9,7 @@ class ExpenseTrackerView:
         self._login_view = login_view
         self._create_expense_view = create_expense_view
         self._frame = None
+        self._toplevel = None
         self._add_expense_view = None
         self._user = expense_service.get_current_user()
 
@@ -18,6 +19,9 @@ class ExpenseTrackerView:
         self._frame.pack()
 
     def destroy(self):
+        if self._toplevel:
+            self._toplevel.destroy()
+
         self._frame.destroy()
 
     def _logout(self):
@@ -27,6 +31,65 @@ class ExpenseTrackerView:
         except:
             messagebox.showerror("Error")
 
+    def _add_expense(self):
+        date = self._date_entry.get()
+        description = self._category_entry.get()
+        amount = self._amount_entry.get()
+
+        try:
+            expense_service.create_expense(date, description, amount)
+            self.destroy()
+            self._initialise()
+            self.pack()
+        except:
+            messagebox.showerror("Error", "Try Again")
+
+    def _add_expense_window(self):
+        self._toplevel = Toplevel(self._root)
+
+        date_label = ttk.Label(
+            master=self._toplevel,
+            text="Date",
+            background="#333333",
+            foreground="white",
+            font=["Arial", 14],
+        )
+        self._date_entry = ttk.Entry(master=self._toplevel)
+
+        category_label = ttk.Label(
+            master=self._toplevel,
+            text="Description",
+            background="#333333",
+            foreground="white",
+            font=["Arial", 14],
+        )
+        self._category_entry = ttk.Entry(master=self._toplevel)
+
+        amount_label = ttk.Label(
+            master=self._toplevel,
+            text="Amount",
+            background="#333333",
+            foreground="white",
+            font=["Arial", 14],
+        )
+        self._amount_entry = ttk.Entry(master=self._toplevel)
+
+        add_expense_button = Button(
+            master=self._toplevel,
+            text="Add Expense",
+            command=self._add_expense,
+            background="#797f85",
+            foreground="black",
+        )
+
+        date_label.grid(row=0, column=0, pady=(30, 0), padx=10)
+        self._date_entry.grid(row=0, column=1, pady=(30, 0))
+        category_label.grid(row=1, column=0, pady=(15, 0), padx=10)
+        self._category_entry.grid(row=1, column=1, pady=(15, 0))
+        amount_label.grid(row=2, column=0, pady=(15, 0), padx=10)
+        self._amount_entry.grid(row=2, column=1, pady=(15, 0))
+        add_expense_button.grid(row=3, column=0, columnspan=2, pady=(40, 20))
+
     def _initialise(self):
         self._root.geometry("600x400")
         self._root.configure(bg="#333333")
@@ -35,8 +98,6 @@ class ExpenseTrackerView:
         s.configure("TFrame", background="#333333", foreground="white")
 
         self._frame = ttk.Frame(master=self._root, style="TFrame")
-
-        expenses = expense_service.get_expenses()
 
         expense_label = ttk.Label(
             master=self._frame,
@@ -52,12 +113,12 @@ class ExpenseTrackerView:
 
         expense_tree.column("# 1", anchor=CENTER)
         expense_tree.heading("# 1", text="Date")
-
         expense_tree.column("# 2", anchor=CENTER)
         expense_tree.heading("# 2", text="Category")
-
         expense_tree.column("# 3", anchor=CENTER)
         expense_tree.heading("# 3", text="Amount")
+
+        expenses = expense_service.get_expenses()
 
         for index, row in expenses.iterrows():
             num = index + 1
@@ -73,7 +134,7 @@ class ExpenseTrackerView:
             master=self._frame,
             text="Add Expense",
             background="#20bd65",
-            command=self._create_expense_view,
+            command=self._add_expense_window,
             foreground="black",
         )
 
