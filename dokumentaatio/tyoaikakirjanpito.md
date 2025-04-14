@@ -7,4 +7,5 @@
 |            |  2   | Sisään- ja uloskirjautumisen, sekä uuden käyttäjätilin luonti ominaisuuksien alustava toteutus | 
 |            |  1   | Testauksen aloitus ja invoke tehtävien toteutus | 
 |    7.4     |  2   | Aloittelin  kulujen lisäämiseen ja katseluun liittyvää toiminnallisuutta | 
-| Yhteensä   | 8.5  | |
+|    14.4     |  1.5   | Tein loppuun kulujen lisäämiseen ja viimeisimpien kulujen katseluun liittyvän toiminnallisuuden | 
+| Yhteensä   | 10  | |

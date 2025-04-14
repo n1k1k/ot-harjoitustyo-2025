@@ -7,3 +7,7 @@
 ## Viikko 4
 
 Olin kipeänä, joten valitettavasti kykenin vain hieman aloittamaan kulujen seurantaan littyvää toiminnallisuutta.
+
+## Viikko 5
+- Käyttäjä pystyy lisäämään kulun.
+- Käyttäjä näkee etusivulla viimeisimmät kulunsa.

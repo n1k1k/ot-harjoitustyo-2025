@@ -10,3 +10,6 @@ except FileNotFoundError:
 
 DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "database.sqlite"
 DATABASE_PATH = os.path.join(dirname, "..", "data", DATABASE_FILENAME)
+
+EXPENSES_FILENAME = os.getenv("EXPENSES_FILENAME") or "expenses.csv"
+EXPENSES_PATH = os.path.join(dirname, "..", "data", EXPENSES_FILENAME)

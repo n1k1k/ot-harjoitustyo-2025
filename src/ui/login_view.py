@@ -1,4 +1,4 @@
-from tkinter import ttk, Entry, Button
+from tkinter import ttk, Entry, Button, messagebox
 from tkinter.ttk import Style
 from services.expense_service import expense_service
 
@@ -29,7 +29,7 @@ class LoginView:
             expense_service.login(username, password)
             self._expense_tracker_view()
         except:
-            print("Error")
+            messagebox.showerror("Error", "Try Again")
 
     def _initialise(self):
         self._root.geometry("600x400")
