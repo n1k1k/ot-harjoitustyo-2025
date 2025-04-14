@@ -1,5 +1,6 @@
 from tkinter import ttk, Button, messagebox, CENTER, Toplevel
 from tkinter.ttk import Style
+from tkcalendar import DateEntry
 from services.expense_service import expense_service
 
 
@@ -34,7 +35,7 @@ class ExpenseTrackerView:
             messagebox.showerror("Error")
 
     def _add_expense(self):
-        date = self._date_entry.get()
+        date = self._date_entry.get_date()
         description = self._category_entry.get()
         amount = self._amount_entry.get()
 
@@ -48,22 +49,26 @@ class ExpenseTrackerView:
 
     def _add_expense_window(self):
         self._toplevel = Toplevel(self._root)
+        self._toplevel.geometry("340x250")
+        self._toplevel.config(bg="#333333")
 
         date_label = ttk.Label(
             master=self._toplevel,
-            text="Date",
+            text="Date (DD/MM/YYY)",
             background="#333333",
             foreground="white",
-            font=["Arial", 14],
+            font=["Arial", 11],
         )
-        self._date_entry = ttk.Entry(master=self._toplevel)
+        self._date_entry = DateEntry(
+            master=self._toplevel, locale="en_US", date_pattern="dd/mm/yyyy"
+        )
 
         category_label = ttk.Label(
             master=self._toplevel,
             text="Description",
             background="#333333",
             foreground="white",
-            font=["Arial", 14],
+            font=["Arial", 11],
         )
         self._category_entry = ttk.Entry(master=self._toplevel)
 
@@ -72,7 +77,7 @@ class ExpenseTrackerView:
             text="Amount",
             background="#333333",
             foreground="white",
-            font=["Arial", 14],
+            font=["Arial", 11],
         )
         self._amount_entry = ttk.Entry(master=self._toplevel)
 
@@ -80,16 +85,18 @@ class ExpenseTrackerView:
             master=self._toplevel,
             text="Add Expense",
             command=self._add_expense,
-            background="#797f85",
+            background="#dde645",
             foreground="black",
         )
 
-        date_label.grid(row=0, column=0, pady=(30, 0), padx=10)
-        self._date_entry.grid(row=0, column=1, pady=(30, 0))
-        category_label.grid(row=1, column=0, pady=(15, 0), padx=10)
-        self._category_entry.grid(row=1, column=1, pady=(15, 0))
-        amount_label.grid(row=2, column=0, pady=(15, 0), padx=10)
-        self._amount_entry.grid(row=2, column=1, pady=(15, 0))
+        date_label.grid(row=0, column=0, pady=(30, 0), padx=(15, 0))
+        category_label.grid(row=1, column=0, pady=(15, 0), padx=(15, 0))
+        amount_label.grid(row=2, column=0, pady=(15, 0), padx=(15, 0))
+
+        self._date_entry.grid(row=0, column=1, pady=(30, 0), sticky="w", padx=(10, 10))
+        self._category_entry.grid(row=1, column=1, pady=(15, 0), padx=(10, 10))
+        self._amount_entry.grid(row=2, column=1, pady=(15, 0), padx=(10, 10))
+
         add_expense_button.grid(row=3, column=0, columnspan=2, pady=(40, 20))
 
     def _initialise(self):
