@@ -21,7 +21,6 @@ class ExpenseRepository:
         expenses = self.all_expenses()
         username = user.username
         user_expenses = expenses.query(f"User == '{username}'")
-        print(user_expenses)
 
         return user_expenses
 
