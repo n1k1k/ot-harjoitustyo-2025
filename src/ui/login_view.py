@@ -32,7 +32,7 @@ class LoginView:
             messagebox.showerror("Error", "Try Again")
 
     def _initialise(self):
-        self._root.geometry("600x400")
+        self._root.geometry("650x400")
         self._root.configure(bg="#333333")
 
         s = Style()

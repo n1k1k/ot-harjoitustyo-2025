@@ -32,7 +32,7 @@ class CreateUserView:
             messagebox.showerror("Error", "Account could not be created")
 
     def _initialise(self):
-        self._root.geometry("600x400")
+        self._root.geometry("650x400")
         self._root.configure(bg="#333333")
 
         s = Style()
