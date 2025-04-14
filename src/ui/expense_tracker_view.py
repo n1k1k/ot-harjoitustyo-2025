@@ -1,16 +1,18 @@
-from tkinter import ttk, Button, messagebox, CENTER, RIGHT, Toplevel
+from tkinter import ttk, Button, messagebox, CENTER, Toplevel
 from tkinter.ttk import Style
 from services.expense_service import expense_service
 
 
 class ExpenseTrackerView:
-    def __init__(self, root, login_view, create_expense_view):
+    def __init__(
+        self,
+        root,
+        login_view,
+    ):
         self._root = root
         self._login_view = login_view
-        self._create_expense_view = create_expense_view
         self._frame = None
         self._toplevel = None
-        self._add_expense_view = None
         self._user = expense_service.get_current_user()
 
         self._initialise()
@@ -156,5 +158,5 @@ class ExpenseTrackerView:
         expense_label.grid(row=0, column=1, pady=(15, 10))
         expense_tree.grid(row=1, column=0, pady=(0, 20), columnspan=3)
         add_expense_button.grid(row=2, column=0, pady=20)
-        view_all_expenses_button.grid(row=2, column=1)
+        # view_all_expenses_button.grid(row=2, column=1)
         logout_button.grid(row=2, column=2)
