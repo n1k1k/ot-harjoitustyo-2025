@@ -1,6 +1,6 @@
-from tkinter import ttk, Entry, Button, messagebox
+from tkinter import ttk, Entry, Button, messagebox, constants
 from tkinter.ttk import Style
-from services.expense_service import expense_service
+from services.expense_service import expense_service, UsernameExistsError
 
 
 class CreateUserView:
@@ -15,7 +15,6 @@ class CreateUserView:
         self._initialise()
 
     def pack(self):
-        # self._frame.pack(fill=constants.BOTH)
         self._frame.pack()
 
     def destroy(self):
@@ -25,11 +24,18 @@ class CreateUserView:
         username = self._username_entry.get()
         password = self._password_entry.get()
 
-        try:
-            expense_service.create_user(username, password)
-            self._expense_tracker_view()
-        except:
-            messagebox.showerror("Error", "Account could not be created")
+        if len(username) <= 2 or len(password) <= 2:
+            messagebox.showerror(
+                "Error",
+                "Account could not be created. Both username and password are required and they must be  at least 3 characters.",
+            )
+        else:
+            try:
+                expense_service.create_user(username, password)
+                expense_service.login(username, password)
+                self._expense_tracker_view()
+            except UsernameExistsError:
+                messagebox.showerror("Error", f'Username "{username}" is already taken')
 
     def _initialise(self):
         self._root.geometry("650x400")

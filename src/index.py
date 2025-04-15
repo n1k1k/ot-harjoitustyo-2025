@@ -4,7 +4,7 @@ from ui.ui import UI
 
 def main():
     window = Tk()
-    window.title("Expence Tracker")
+    window.title("Expense Tracker")
 
     ui_view = UI(window)
     ui_view.start()
