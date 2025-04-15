@@ -31,6 +31,12 @@ class UserRepository:
 
         return user
 
+    def delete_all_users(self):
+        cursor = self._db.cursor()
+        cursor.execute("delete from users")
+
+        self._db.commit()
+
 
 db = get_database_connection()
 user_repository = UserRepository(db)

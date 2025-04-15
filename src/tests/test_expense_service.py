@@ -1,13 +1,14 @@
 import unittest
 from database_connection import get_database_connection
 from services.expense_service import ExpenseService
-from repositories.user_repository import UserRepository
+from repositories.user_repository import user_repository
+from repositories.expense_repository import expense_repository
 
 
 class TestExpenseService(unittest.TestCase):
     def setUp(self):
-        self._user_repository = UserRepository(get_database_connection())
-        self._expense_service = ExpenseService(self._user_repository)
+        user_repository.delete_all_users()
+        self._expense_service = ExpenseService(user_repository, expense_repository)
 
     def test_username_is_set_correctly_when_new_user_is_created(self):
         username = "name"

@@ -5,3 +5,4 @@ htmlcov
 database.sqlite
 database_test.sqlite
 expenses.csv
+expenses_test.csv

@@ -45,5 +45,10 @@ class ExpenseRepository:
     def write(self, expenses):
         expenses.to_csv(self._file_path, index=False)
 
+    def delete_all_expenses(self):
+        df = pd.DataFrame({"Date": [], "Description": [], "Amount": [], "User": []})
+
+        self.write(df)
+
 
 expense_repository = ExpenseRepository(EXPENSES_PATH)
