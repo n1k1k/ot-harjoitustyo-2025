@@ -27,7 +27,7 @@ class ExpenseTrackerView:
 
         self._frame.destroy()
 
-    def _handel_new_expense(self):
+    def _new_expense_handler(self):
         self._frame.destroy()
         self._initialise()
         self.pack()
