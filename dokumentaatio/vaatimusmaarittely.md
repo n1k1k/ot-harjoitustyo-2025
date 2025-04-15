@@ -12,14 +12,15 @@ Sovelluksessa on vain yksi käyttäjärooli: normaali käyttäjä.
 
 ### Ennen kirjautumista
 
-- Käyttäjä voi luoda käyttäjätunnuksen järjestelmään.
+- Käyttäjä voi luoda käyttäjätunnuksen järjestelmään. :white_check_mark:
     - Käyttäjätunnuksen on täytettävä vähimmäisvaatimukset (vähintään 3 merkkiä pitkä ja sen on  oltava yksilöllinen)
-- Käyttäjä voi kirjautua järjestelmään.
+- Käyttäjä voi kirjautua järjestelmään. :white_check_mark:
     - Jos käyttäjätunnusta ei ole olemassa tai salasana on väärä, järjestelmä ilmoittaa tästä käyttäjälle.
 
 ### Kirjautumisen jälkeen
 
-- Käyttäjä näkee listan omista kuluistaan.
+- Käyttäjä voi lisätä uuden kulun. :white_check_mark:
+- Käyttäjä näkee listan omista kuluistaan. :white_check_mark:
 - Käyttäjä näkee yhteenvedon kuluistaan.
     - Kulujen kokonaissumaassa ja kategoriakohtainen jakautuminen (ruoka, asuminen, vapaa-aika jne.)
 - Käyttäjä voi muokata ja poistaa olemassa olevia kuluja. 
