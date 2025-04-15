@@ -1,6 +1,5 @@
-from repositories.user_repository import user_repository
-from config import EXPENSES_PATH
 import pandas as pd
+from config import EXPENSES_PATH
 
 
 class ExpenseRepository:
@@ -10,7 +9,7 @@ class ExpenseRepository:
     def all_expenses(self):
         try:
             df = pd.read_csv(self._file_path)
-        except Exception as e:
+        except:
             data = {"Date": [], "Description": [], "Amount": [], "User": []}
 
             df = pd.DataFrame(data)

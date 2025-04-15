@@ -1,5 +1,4 @@
 import unittest
-from database_connection import get_database_connection
 from services.expense_service import ExpenseService
 from repositories.user_repository import user_repository
 from repositories.expense_repository import expense_repository

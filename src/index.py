@@ -1,6 +1,5 @@
 from tkinter import Tk
 from ui.ui import UI
-from initialise_database import initialise_database
 
 
 def main():

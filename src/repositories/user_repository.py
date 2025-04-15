@@ -38,5 +38,5 @@ class UserRepository:
         self._db.commit()
 
 
-db = get_database_connection()
-user_repository = UserRepository(db)
+db_connection = get_database_connection()
+user_repository = UserRepository(db_connection)
