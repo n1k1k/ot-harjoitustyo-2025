@@ -1,7 +1,7 @@
 
-Uuden kulun luovan "Add Expense" painikkeen klikkaamisen jälkeen tapahtuva sovelluksen toimintalogiikka sekvenssikaaviona:
+Uuden kulun luovan "Add Expense" painikkeen klikkaamisen seurauksena tapahtuva sovelluksen toimintalogiikka sekvenssikaaviona:
 
-```mermaidmermaid
+```mermaid
 sequenceDiagram
     actor User
     User->>UI:click button "Add Expense"
@@ -14,4 +14,4 @@ sequenceDiagram
     ExpenseService->>ExpenseRepository: get_expenses_by_user(User)
     ExpenseRepository -->> ExpenseService: expenses
     ExpenseService -->> UI: expenses
-```mermaid
+```
