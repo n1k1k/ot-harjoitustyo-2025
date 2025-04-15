@@ -10,4 +10,5 @@
 |    14.4     |  1.5   | Tein loppuun kulujen lisäämiseen ja viimeisimpien kulujen katseluun liittyvän toiminnallisuuden | 
 |         |   2  | Käyttöliittymän hienosäätö (mm. lisätty vierityspalkki) ja koodin refaktorointi | 
 |  15.4   |   1.5  | Testaus | 
-| Yhteensä   | 14  | |
+|  15.4   |   0.5  | Korjattu virheenkäsittely uuden tilin luonnissa | 
+| Yhteensä   | 14.5  | |
