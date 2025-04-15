@@ -9,5 +9,5 @@
 |    7.4     |  2   | Aloittelin  kulujen lisäämiseen ja katseluun liittyvää toiminnallisuutta | 
 |    14.4     |  1.5   | Tein loppuun kulujen lisäämiseen ja viimeisimpien kulujen katseluun liittyvän toiminnallisuuden | 
 |         |   2  | Käyttöliittymän hienosäätö (mm. lisätty vierityspalkki) ja koodin refaktorointi | 
-|         |   1.5  | Testaus | 
+|  15.4   |   1.5  | Testaus | 
 | Yhteensä   | 14  | |
