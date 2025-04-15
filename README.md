@@ -9,6 +9,7 @@ Sovellus mahdollistaa käyttäjälle omien kulujensa seurannan ja hallinnan. Rek
 - [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 - [Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
 - [Changelog](dokumentaatio/changelog.md)
+- [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
 
 ## Asennus
 Asenna ensin sovelluksen riippuvuudet komennolla:
