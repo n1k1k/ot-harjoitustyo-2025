@@ -1,4 +1,4 @@
-from tkinter import ttk, Button, messagebox, CENTER, LEFT, RIGHT, Y, BOTH, Toplevel
+from tkinter import ttk, Button, messagebox, CENTER, BOTH, Y, Toplevel, constants
 from tkinter.ttk import Style
 from tkcalendar import DateEntry
 from services.expense_service import expense_service
@@ -27,6 +27,11 @@ class ExpenseTrackerView:
 
         self._frame.destroy()
 
+    def _handel_new_expense(self):
+        self._frame.destroy()
+        self._initialise()
+        self.pack()
+
     def _logout(self):
         try:
             expense_service.logout()
@@ -41,9 +46,7 @@ class ExpenseTrackerView:
 
         try:
             expense_service.create_expense(date, description, amount)
-            self.destroy()
-            self._initialise()
-            self.pack()
+            self._handel_new_expense()
         except:
             messagebox.showerror("Error", "Try Again")
 
@@ -51,38 +54,56 @@ class ExpenseTrackerView:
         self._toplevel = Toplevel(self._root)
         self._toplevel.geometry("340x250")
         self._toplevel.config(bg="#333333")
+        self._toplevel.title("Add Expense")
+
+        toplevel_frame = ttk.Frame(self._toplevel)
+        toplevel_frame.pack(fill=constants.Y)
 
         date_label = ttk.Label(
-            master=self._toplevel,
+            master=toplevel_frame,
             text="Date (DD/MM/YYY)",
             background="#333333",
             foreground="white",
             font=["Arial", 11],
         )
         self._date_entry = DateEntry(
-            master=self._toplevel, locale="en_US", date_pattern="dd/mm/yyyy"
+            master=toplevel_frame, locale="en_US", date_pattern="dd/mm/yyyy"
         )
 
         category_label = ttk.Label(
-            master=self._toplevel,
-            text="Description",
+            master=toplevel_frame,
+            text="Category",
             background="#333333",
             foreground="white",
             font=["Arial", 11],
         )
-        self._category_entry = ttk.Entry(master=self._toplevel)
+
+        categories = [
+            "Housing",
+            "Utilities",
+            "Transportation",
+            "Groceries",
+            "Restaurants",
+            "Healthcare",
+            "Entertainment",
+            "Clothing",
+            "Other",
+        ]
+        self._category_entry = ttk.Combobox(
+            master=toplevel_frame, state="readonly", values=categories
+        )
 
         amount_label = ttk.Label(
-            master=self._toplevel,
+            master=toplevel_frame,
             text="Amount",
             background="#333333",
             foreground="white",
             font=["Arial", 11],
         )
-        self._amount_entry = ttk.Entry(master=self._toplevel)
+        self._amount_entry = ttk.Entry(master=toplevel_frame)
 
         add_expense_button = Button(
-            master=self._toplevel,
+            master=toplevel_frame,
             text="Add Expense",
             command=self._add_expense,
             background="#dde645",
@@ -90,13 +111,14 @@ class ExpenseTrackerView:
         )
 
         date_label.grid(row=0, column=0, pady=(30, 0), padx=(15, 0))
-        category_label.grid(row=1, column=0, pady=(15, 0), padx=(15, 0))
-        amount_label.grid(row=2, column=0, pady=(15, 0), padx=(15, 0))
+        category_label.grid(row=1, column=0, pady=(20, 0), padx=(15, 0))
+        amount_label.grid(row=2, column=0, pady=(20, 0), padx=(15, 0))
 
-        self._date_entry.grid(row=0, column=1, pady=(30, 0), sticky="w", padx=(10, 10))
-        self._category_entry.grid(row=1, column=1, pady=(15, 0), padx=(10, 10))
-        self._amount_entry.grid(row=2, column=1, pady=(15, 0), padx=(10, 10))
-
+        self._date_entry.grid(row=0, column=1, pady=(30, 0), sticky="w", padx=10)
+        self._category_entry.config(width=18)
+        self._category_entry.grid(row=1, column=1, pady=(20, 0), padx=10)
+        self._amount_entry.config(width=19)
+        self._amount_entry.grid(row=2, column=1, pady=(20, 0), padx=10)
         add_expense_button.grid(row=3, column=0, columnspan=2, pady=(40, 20))
 
     def _initialise(self):

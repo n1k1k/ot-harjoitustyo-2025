@@ -24,10 +24,7 @@ class UserRepository:
         cursor.execute("select * from users where username = ?", (username,))
         row = cursor.fetchone()
 
-        try:
-            user = User(row["username"], row["password"]) if row else False
-        except:
-            return False
+        user = User(row["username"], row["password"]) if row else None
 
         return user
 

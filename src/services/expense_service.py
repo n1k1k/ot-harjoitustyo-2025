@@ -7,6 +7,10 @@ from repositories.expense_repository import (
 )
 
 
+class UsernameExistsError(Exception):
+    pass
+
+
 class ExpenseService:
     def __init__(self, user_repository, expense_repository):
         self._user = None
@@ -41,7 +45,7 @@ class ExpenseService:
         check_username = self._user_repository.find_by_username(username)
 
         if check_username:
-            return False
+            raise UsernameExistsError(f"Username {username} is already taken")
 
         user = self._user_repository.create_user(User(username, password))
         self._user = user
