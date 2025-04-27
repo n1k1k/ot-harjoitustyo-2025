@@ -11,3 +11,6 @@ Olin kipeänä, joten valitettavasti kykenin vain hieman aloittamaan kulujen seu
 ## Viikko 5
 - Käyttäjä pystyy lisäämään kulun.
 - Käyttäjä näkee etusivulla listan omista kuluistaan.
+
+## Viikko 6
+- Käyttäjä voi poistaa kulun.

@@ -11,4 +11,5 @@
 |         |   2  | Käyttöliittymän hienosäätö (mm. lisätty vierityspalkki) ja koodin refaktorointi | 
 |  15.4   |   1.5  | Testaus | 
 |  15.4   |   0.5  | Korjattu virheenkäsittely uuden tilin luonnissa | 
-| Yhteensä   | 14.5  | |
+|  27.4   |   1  | Kulujen poistamis-ominaisuuden toteuttaminen | 
+| Yhteensä   | 15.5  | |
