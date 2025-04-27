@@ -50,6 +50,10 @@ class ExpenseTrackerView:
         except:
             messagebox.showerror("Error", "Try Again")
 
+    def _delete_expense(self):
+        expense = self._expense_tree.selection()[0]
+        self._expense_tree.delete(expense)
+
     def _add_expense_window(self):
         self._toplevel = Toplevel(self._root)
         self._toplevel.geometry("340x250")
@@ -132,7 +136,7 @@ class ExpenseTrackerView:
 
         frame = ttk.Frame(self._frame)
 
-        expense_tree = ttk.Treeview(
+        self._expense_tree = ttk.Treeview(
             frame,
             column=("c1", "c2", "c3"),
             show="headings",
@@ -140,22 +144,24 @@ class ExpenseTrackerView:
             selectmode="browse",
         )
 
-        expense_tree.column("# 1", anchor=CENTER)
-        expense_tree.heading("# 1", text="Date")
-        expense_tree.column("# 2", anchor=CENTER)
-        expense_tree.heading("# 2", text="Category")
-        expense_tree.column("# 3", anchor=CENTER)
-        expense_tree.heading("# 3", text="Amount (€)")
+        self._expense_tree.column("# 1", anchor=CENTER)
+        self._expense_tree.heading("# 1", text="Date")
+        self._expense_tree.column("# 2", anchor=CENTER)
+        self._expense_tree.heading("# 2", text="Category")
+        self._expense_tree.column("# 3", anchor=CENTER)
+        self._expense_tree.heading("# 3", text="Amount (€)")
 
-        scrollbar = ttk.Scrollbar(frame, orient="vertical", command=expense_tree.yview)
-        expense_tree.configure(yscrollcommand=scrollbar.set)
+        scrollbar = ttk.Scrollbar(
+            frame, orient="vertical", command=self._expense_tree.yview
+        )
+        self._expense_tree.configure(yscrollcommand=scrollbar.set)
 
         expenses = expense_service.get_expenses()
 
         for index, row in expenses.iterrows():
             num = index + 1
             i = str(num)
-            expense_tree.insert(
+            self._expense_tree.insert(
                 "",
                 "end",
                 text=i,
@@ -170,16 +176,25 @@ class ExpenseTrackerView:
             foreground="black",
         )
 
+        delete_expense_button = Button(
+            master=self._frame,
+            text="Delete Expense",
+            background="#d13b3b",
+            command=self._delete_expense,
+            foreground="black",
+        )
+
         logout_button = Button(
             master=self._frame,
             text="Log out",
             command=self._logout,
-            background="#d13b3b",
+            background="gray",
             foreground="black",
         )
 
-        frame.grid(row=1, column=0, columnspan=2, padx=5, pady=(20, 10))
-        expense_tree.pack(side="left")
+        frame.grid(row=1, column=0, columnspan=3, padx=5, pady=(20, 10))
+        self._expense_tree.pack(side="left")
         scrollbar.pack(side="right", fill="y")
         add_expense_button.grid(row=2, column=0, pady=20)
-        logout_button.grid(row=2, column=1)
+        delete_expense_button.grid(row=2, column=1)
+        logout_button.grid(row=2, column=2)
