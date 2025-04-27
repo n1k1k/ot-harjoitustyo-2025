@@ -46,7 +46,7 @@ class ExpenseTrackerView:
 
         try:
             expense_service.create_expense(date, description, amount)
-            self._handel_new_expense()
+            self._new_expense_handler()
         except:
             messagebox.showerror("Error", "Try Again")
 
