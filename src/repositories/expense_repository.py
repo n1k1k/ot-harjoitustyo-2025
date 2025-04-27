@@ -44,6 +44,21 @@ class ExpenseRepository:
     def write(self, expenses):
         expenses.to_csv(self._file_path, index=False)
 
+    def delete_one_expense(self, date, category, amount, user):
+        df = self.all_expenses()
+
+        i = df[
+            (
+                (df.Date == date)
+                & (df.Description == category)
+                & (df.Amount == amount)
+                & (df.User == user)
+            )
+        ].index
+
+        new_df = df.drop(i[0])
+        self.write(new_df)
+
     def delete_all_expenses(self):
         df = pd.DataFrame({"Date": [], "Description": [], "Amount": [], "User": []})
 

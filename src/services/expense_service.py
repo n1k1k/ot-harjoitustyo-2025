@@ -11,6 +11,10 @@ class UsernameExistsError(Exception):
     pass
 
 
+class DeleteError(Exception):
+    pass
+
+
 class ExpenseService:
     def __init__(self, user_repository, expense_repository):
         self._user = None
@@ -27,6 +31,14 @@ class ExpenseService:
     def add_expense(self, date, description, amount):
         user = self.get_current_user()
         return self._expense_repository.add_expense(date, description, amount, user)
+
+    def delete_expense(self, date, category, amount):
+        user = self.get_current_user().username
+
+        try:
+            default_expense_repository.delete_one_expense(date, category, amount, user)
+        except:
+            raise DeleteError("Record could not be deleted")
 
     def login(self, username, password):
         user = self._user_repository.find_by_username(username)

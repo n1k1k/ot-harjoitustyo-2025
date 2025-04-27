@@ -1,7 +1,7 @@
 from tkinter import ttk, Button, messagebox, CENTER, BOTH, Y, Toplevel, constants
 from tkinter.ttk import Style
 from tkcalendar import DateEntry
-from services.expense_service import expense_service
+from services.expense_service import expense_service, DeleteError
 
 
 class ExpenseTrackerView:
@@ -52,7 +52,13 @@ class ExpenseTrackerView:
 
     def _delete_expense(self):
         expense = self._expense_tree.selection()[0]
-        self._expense_tree.delete(expense)
+        date, category, amount = self._expense_tree.item(expense)["values"]
+
+        try:
+            expense_service.delete_expense(date, category, amount)
+            self._expense_tree.delete(expense)
+        except DeleteError:
+            messagebox.showerror("Error", "Record was not deleted. Try again!")
 
     def _add_expense_window(self):
         self._toplevel = Toplevel(self._root)
