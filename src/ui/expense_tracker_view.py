@@ -45,13 +45,23 @@ class ExpenseTrackerView:
         amount = self._amount_entry.get()
 
         try:
+            float(amount)
+        except:
+            messagebox.showerror("Error", "Amount must be a number")
+            return
+
+        try:
             expense_service.create_expense(date, description, amount)
             self._new_expense_handler()
         except:
             messagebox.showerror("Error", "Try Again")
 
     def _delete_expense(self):
-        expense = self._expense_tree.selection()[0]
+        selection = self._expense_tree.selection()
+        if selection == ():
+            return
+
+        expense = selection[0]
         date, category, amount = self._expense_tree.item(expense)["values"]
 
         try:
