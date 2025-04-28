@@ -9,6 +9,7 @@ class ExpenseRepository:
     def all_expenses(self):
         try:
             df = pd.read_csv(self._file_path)
+            df = df.sort_values(by="Date", ascending=False)
         except:
             data = {"Date": [], "Description": [], "Amount": [], "User": []}
 

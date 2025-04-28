@@ -279,7 +279,7 @@ class ExpenseTrackerView:
         )
 
         self._expense_tree.column("# 1", anchor=CENTER)
-        self._expense_tree.heading("# 1", text="Date")
+        self._expense_tree.heading("# 1", text="Date (yyyy-mm-dd)")
         self._expense_tree.column("# 2", anchor=CENTER)
         self._expense_tree.heading("# 2", text="Category")
         self._expense_tree.column("# 3", anchor=CENTER)
