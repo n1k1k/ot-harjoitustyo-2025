@@ -13,4 +13,5 @@
 |  15.4   |   0.5  | Korjattu virheenkäsittely uuden tilin luonnissa | 
 |  27.4   |   1  | Kulujen poistamis-ominaisuuden toteuttaminen | 
 |  28.4   |   1  | Kulujen muokkaus-ominaisuuden toteuttaminen | 
-| Yhteensä   | 16.5  | |
+|     |   1  | Käyttöohjeen kirjoittaminen | 
+| Yhteensä   | 17.5  | |
