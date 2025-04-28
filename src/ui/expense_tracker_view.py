@@ -107,7 +107,7 @@ class ExpenseTrackerView:
 
         try:
             expense_service.delete_expense(date, category, amount)
-            self._expense_tree.delete(expense)
+            self._expense_tree.delete(selection)
         except DeleteError:
             messagebox.showerror("Error", "Record was not deleted. Try again!")
 

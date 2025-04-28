@@ -52,7 +52,7 @@ class ExpenseRepository:
             (
                 (df.Date == date)
                 & (df.Description == category)
-                & (df.Amount == amount)
+                & (df.Amount == float(amount))
                 & (df.User == user)
             )
         ].index
