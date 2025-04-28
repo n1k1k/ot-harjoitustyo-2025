@@ -27,6 +27,13 @@ class ExpenseTrackerView:
 
         self._frame.destroy()
 
+    def _get_selected_expense(self):
+        selection = self._expense_tree.selection()
+        if selection == ():
+            return False
+
+        return selection
+
     def _new_expense_handler(self):
         self._frame.destroy()
         self._initialise()
@@ -56,9 +63,43 @@ class ExpenseTrackerView:
         except:
             messagebox.showerror("Error", "Try Again")
 
+    def _edit_expense(self):
+        selection = self._get_selected_expense()
+        if not selection:
+            return
+
+        expense = selection[0]
+        date, category, amount = self._expense_tree.item(expense)["values"]
+
+        try:
+            self._edit_expense_window(date, category, amount)
+        except:
+            messagebox.showerror("Error", "Try again")
+            return
+
+    def _handle_edit_expense(self):
+        date = self._date_entry.get_date()
+        description = self._category_entry.get()
+        amount = self._amount_entry.get()
+
+        try:
+            float(amount)
+        except:
+            messagebox.showerror("Error", "Amount must be a number")
+            return
+
+        try:
+            expense_service.create_expense(date, description, amount)
+            self._delete_expense()
+            self._new_expense_handler()
+            self._toplevel.destroy()
+        except:
+            messagebox.showerror("Error", "Try Again")
+            return False
+
     def _delete_expense(self):
-        selection = self._expense_tree.selection()
-        if selection == ():
+        selection = self._get_selected_expense()
+        if not selection:
             return
 
         expense = selection[0]
@@ -141,6 +182,83 @@ class ExpenseTrackerView:
         self._amount_entry.grid(row=2, column=1, pady=(20, 0), padx=10)
         add_expense_button.grid(row=3, column=0, columnspan=2, pady=(40, 20))
 
+    def _edit_expense_window(self, date, category, amount):
+        self._toplevel = Toplevel(self._root)
+        self._toplevel.geometry("340x250")
+        self._toplevel.config(bg="#333333")
+        self._toplevel.title("Edit")
+
+        toplevel_frame = ttk.Frame(self._toplevel)
+        toplevel_frame.pack(fill=constants.Y)
+
+        date_label = ttk.Label(
+            master=toplevel_frame,
+            text="Date (DD/MM/YYY)",
+            background="#333333",
+            foreground="white",
+            font=["Arial", 11],
+        )
+        self._date_entry = DateEntry(
+            master=toplevel_frame, locale="en_US", date_pattern="yyyy-mm-dd"
+        )
+        self._date_entry.set_date(date)
+
+        category_label = ttk.Label(
+            master=toplevel_frame,
+            text="Category",
+            background="#333333",
+            foreground="white",
+            font=["Arial", 11],
+        )
+
+        categories = [
+            "Housing",
+            "Utilities",
+            "Transportation",
+            "Groceries",
+            "Restaurants",
+            "Healthcare",
+            "Entertainment",
+            "Clothing",
+            "Other",
+        ]
+
+        self._category_entry = ttk.Combobox(
+            master=toplevel_frame, state="readonly", values=categories
+        )
+
+        i = categories.index(category)
+        self._category_entry.current(i)
+
+        amount_label = ttk.Label(
+            master=toplevel_frame,
+            text="Amount",
+            background="#333333",
+            foreground="white",
+            font=["Arial", 11],
+        )
+        self._amount_entry = ttk.Entry(master=toplevel_frame)
+        self._amount_entry.insert("end", amount)
+
+        edit_expense_button = Button(
+            master=toplevel_frame,
+            text="Update Expense",
+            command=self._handle_edit_expense,
+            background="#dde645",
+            foreground="black",
+        )
+
+        date_label.grid(row=0, column=0, pady=(30, 0), padx=(15, 0))
+        category_label.grid(row=1, column=0, pady=(20, 0), padx=(15, 0))
+        amount_label.grid(row=2, column=0, pady=(20, 0), padx=(15, 0))
+
+        self._date_entry.grid(row=0, column=1, pady=(30, 0), sticky="w", padx=10)
+        self._category_entry.config(width=18)
+        self._category_entry.grid(row=1, column=1, pady=(20, 0), padx=10)
+        self._amount_entry.config(width=19)
+        self._amount_entry.grid(row=2, column=1, pady=(20, 0), padx=10)
+        edit_expense_button.grid(row=3, column=0, columnspan=2, pady=(40, 20))
+
     def _initialise(self):
         self._root.geometry("650x400")
         self._root.configure(bg="#333333")
@@ -192,9 +310,17 @@ class ExpenseTrackerView:
             foreground="black",
         )
 
+        edit_expense_button = Button(
+            master=self._frame,
+            text="Edit",
+            background="#ddf542",
+            command=self._edit_expense,
+            foreground="black",
+        )
+
         delete_expense_button = Button(
             master=self._frame,
-            text="Delete Expense",
+            text="Delete",
             background="#d13b3b",
             command=self._delete_expense,
             foreground="black",
@@ -208,9 +334,10 @@ class ExpenseTrackerView:
             foreground="black",
         )
 
-        frame.grid(row=1, column=0, columnspan=3, padx=5, pady=(20, 10))
+        frame.grid(row=1, column=0, columnspan=4, padx=5, pady=(20, 10))
         self._expense_tree.pack(side="left")
         scrollbar.pack(side="right", fill="y")
         add_expense_button.grid(row=2, column=0, pady=20)
-        delete_expense_button.grid(row=2, column=1)
-        logout_button.grid(row=2, column=2)
+        edit_expense_button.grid(row=2, column=1)
+        delete_expense_button.grid(row=2, column=2)
+        logout_button.grid(row=2, column=3)
