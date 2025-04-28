@@ -6,6 +6,7 @@ Sovellus mahdollistaa käyttäjälle omien kulujensa seurannan ja hallinnan. Rek
 
 ## Dokumentaatio
 
+- [Käyttöohje](dokumentaatio/kayttoohje.md)
 - [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 - [Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
 - [Changelog](dokumentaatio/changelog.md)
