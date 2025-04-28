@@ -25,7 +25,7 @@ Sovelluksessa on vain yksi käyttäjärooli: normaali käyttäjä.
     - Kulujen kokonaissumma
     - Kategoriakohtainen jakautuminen (ruoka, asuminen, vapaa-aika jne.)
 - Käyttäjä voi poistaa olemassa olevia kuluja. :white_check_mark:
-- Käyttäjä voi muokata  olemassa olevia kuluja. 
+- Käyttäjä voi muokata  olemassa olevia kuluja. :white_check_mark:
 
 ## Jatkokehitysideoita
 - Kulujen suodatus ja lajittelu esimerkiksi kategorian tai päivämäärän perusteella.

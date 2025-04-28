@@ -12,4 +12,5 @@
 |  15.4   |   1.5  | Testaus | 
 |  15.4   |   0.5  | Korjattu virheenkäsittely uuden tilin luonnissa | 
 |  27.4   |   1  | Kulujen poistamis-ominaisuuden toteuttaminen | 
-| Yhteensä   | 15.5  | |
+|  28.4   |   1  | Kulujen muokkaus-ominaisuuden toteuttaminen | 
+| Yhteensä   | 16.5  | |
