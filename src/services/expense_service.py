@@ -8,23 +8,78 @@ from repositories.expense_repository import (
 
 
 class UsernameExistsError(Exception):
+    """
+    Raised if the username already exists, when attempting to create a new user.
+    """
+
     pass
 
 
 class DeleteError(Exception):
+    """
+    Raised when an expense record cannot be deleted.
+    """
+
+    pass
+
+
+class AuthenticationError(Exception):
+    """
+    Raised when the give password does not match the password in the database.
+    """
+
+    pass
+
+
+class UserNotFoundError(Exception):
+    """
+    Raised when the given username is not found in the database.
+    """
+
     pass
 
 
 class ExpenseService:
+    """
+    Class responsible for the application logic.
+
+    Attributes:
+        user_repository: An instance of class UserRepository.
+        expense_repository: An instance of class ExpenseReposiotry.
+
+    """
+
     def __init__(self, user_repository, expense_repository):
+        """
+        Class constructor. Creates a new service that is responsible for the application logic.
+
+        Args:
+            user_repository: An instance of class UserRepository, that manages user records.
+            expense_repository: An instance of class ExpenseReposiotry, that manages expense records.
+        """
+
         self._user = None
         self._user_repository = user_repository
         self._expense_repository = expense_repository
 
     def get_current_user(self):
+        """
+        Fetches the user that is currently logged-in.
+
+        Returns:
+            An instance of class User if user is logged-in, otherwise None.
+        """
+
         return self._user
 
     def get_expenses(self):
+        """
+        Fetches the expenses for the currently logged-in user.
+
+        Returns:
+            A pandas DataFrame containing the user's expenses if user logged-in, otherwise None.
+        """
+
         expense_df = self._expense_repository.expenses_by_user(self._user)
         return expense_df
 
@@ -33,6 +88,15 @@ class ExpenseService:
         return self._expense_repository.add_expense(date, description, amount, user)
 
     def delete_expense(self, date, category, amount):
+        """
+        Deletes a specified expense record for the currently logged-in user.
+
+        Args:
+            date: Date of the expense.
+            category: Description (category) of the expense.
+            amount: Amount spent.
+        """
+
         user = self.get_current_user().username
 
         try:
@@ -41,19 +105,52 @@ class ExpenseService:
             raise DeleteError("Record could not be deleted")
 
     def login(self, username, password):
+        """
+        Authenticates a user by username and password.
+
+        Args:
+            username: The user's username.
+            password: The user's password.
+
+        Returns:
+            The authenticated user if user found and password matches.
+
+        Raises:
+
+        """
+
         user = self._user_repository.find_by_username(username)
 
-        if not user or user.password != password:
-            raise ValueError
+        if not user:
+            raise UserNotFoundError("User not found")
+
+        if not user.password != password:
+            raise AuthenticationError("Passwords do not match")
 
         self._user = user
 
         return user
 
     def logout(self):
+        """
+        Logs out the current user.
+        """
+
         self._user = None
 
     def create_user(self, username, password):
+        """
+        Creates a new instance of class User.
+
+        Args:
+            username: The username for the user.
+            password: The password for the user.
+
+        Returns:
+            The instance of class User that was created.
+
+        """
+
         check_username = self._user_repository.find_by_username(username)
 
         if check_username:

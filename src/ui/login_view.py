@@ -1,6 +1,10 @@
 from tkinter import ttk, Entry, Button, messagebox
 from tkinter.ttk import Style
-from services.expense_service import expense_service
+from services.expense_service import (
+    expense_service,
+    AuthenticationError,
+    UserNotFoundError,
+)
 
 
 class LoginView:
@@ -27,8 +31,10 @@ class LoginView:
         try:
             expense_service.login(username, password)
             self._expense_tracker_view()
-        except:
-            messagebox.showerror("Error", "Try Again")
+        except AuthenticationError:
+            messagebox.showerror("Error", "Wrong password. Try again!")
+        except UserNotFoundError:
+            messagebox.showerror("Error", "Username not found. Try again!")
 
     def _initialise(self):
         self._root.geometry("650x400")
