@@ -4,6 +4,8 @@ Ohjelmistotekniikka, harjoitustyö - Kevät 2025
 
 Sovellus mahdollistaa käyttäjälle omien kulujensa seurannan ja hallinnan. Rekisteröityneet käyttäjät voivat tarkastella ja kirjata kuluja ja tehdä niihin muokkauksia.
 
+<br/>
+
 ## Dokumentaatio
 
 - [Käyttöohje](dokumentaatio/kayttoohje.md)
@@ -12,7 +14,16 @@ Sovellus mahdollistaa käyttäjälle omien kulujensa seurannan ja hallinnan. Rek
 - [Changelog](dokumentaatio/changelog.md)
 - [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
 
+<br/>
+
+## Releases
+  - [Viikko 6](https://github.com/n1k1k/ot-harjoitustyo-2025/releases/tag/viikko6)
+  - [Viikko 5](https://github.com/n1k1k/ot-harjoitustyo-2025/releases/tag/viikko5)
+
+<br/>
+
 ## Asennus
+
 Asenna ensin sovelluksen riippuvuudet komennolla:
  ```bash
  poetry install
@@ -23,7 +34,10 @@ Sen jälkeen suorita alustustoimenpiteet komennolla:
  poetry run invoke build
  ```
 
+<br/>
+
 ## Sovelluksen käyttö komentoriviltä ja testaus
+
 Ohjelman voi käynnistää komennolla:
 ```bash
 poetry run invoke start
