@@ -124,7 +124,7 @@ class ExpenseService:
         if not user:
             raise UserNotFoundError("User not found")
 
-        if not user.password != password:
+        if user.password != password:
             raise AuthenticationError("Passwords do not match")
 
         self._user = user
