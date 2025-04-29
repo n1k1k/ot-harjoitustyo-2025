@@ -3,10 +3,27 @@ from config import EXPENSES_PATH
 
 
 class ExpenseRepository:
+    """
+    Repository for managing and storing expense records in a CSV file.
+    """
+
     def __init__(self, file_path):
+        """
+        Class constructor
+
+        Args:
+            file_path: Path to the CSV file, that the expenses are stored in.
+        """
         self._file_path = file_path
 
     def all_expenses(self):
+        """
+        Fetches all expenses from the CSV file and sorts them by date in descending order
+
+        Returns:
+            A pandas DataFrame containing all expense records, sorted by date in descending order.
+        """
+
         try:
             df = pd.read_csv(self._file_path)
             df = df.sort_values(by="Date", ascending=False)
@@ -18,6 +35,16 @@ class ExpenseRepository:
         return df
 
     def expenses_by_user(self, user):
+        """
+        Fetches expenses for a specified user.
+
+        Args:
+            user: An instance of class User.
+
+        Returns:
+            A pandas DataFrane containing expense records for the given user.
+        """
+
         expenses = self.all_expenses()
         username = user.username
         user_expenses = expenses.query(f"User == '{username}'")
@@ -25,6 +52,19 @@ class ExpenseRepository:
         return user_expenses
 
     def add_expense(self, date, description, amount, user):
+        """
+        Adds a new expense to the CSV file.
+
+        Args:
+            date: Date of the expense.
+            description: Description (category) of the expense.
+            amount: Amount spent.
+            user: An instance of class User.
+
+        Returns:
+            A pandas DataFrame containing expense records including the newly added expense.
+        """
+
         username = user.username
 
         new_expense = pd.DataFrame(
@@ -43,9 +83,26 @@ class ExpenseRepository:
         return new_expenses
 
     def write(self, expenses):
+        """
+        Writes the given DataFrame to the CSV file.
+
+        Args:
+            expenses: The pandas DataFrame to write.
+        """
+
         expenses.to_csv(self._file_path, index=False)
 
     def delete_one_expense(self, date, category, amount, user):
+        """
+        Deletes a specified expense from the CSV file that mathes the given arguments.
+
+        Args:
+            date: Date of the expense.
+            description: Description (category) of the expense.
+            amount: Amount spent.
+            user: Username associated with the expense.
+        """
+
         df = self.all_expenses()
 
         i = df[
@@ -61,6 +118,10 @@ class ExpenseRepository:
         self.write(new_df)
 
     def delete_all_expenses(self):
+        """
+        Overwrites the CSV file with an empty pandas DataFrame.
+        """
+
         df = pd.DataFrame({"Date": [], "Description": [], "Amount": [], "User": []})
 
         self.write(df)
