@@ -15,4 +15,5 @@
 |  28.4   |   1  | Kulujen muokkaus-ominaisuuden toteuttaminen | 
 |     |   1  | Käyttöohjeen kirjoittaminen | 
 |   29.4  |   1.5  | Arkkitehtuurikuvauksen kirjoittaminen | 
-| Yhteensä   | 19  | |
+|     |   1.5  | Docstring | 
+| Yhteensä   | 20.5  | |
