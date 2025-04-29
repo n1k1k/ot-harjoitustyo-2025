@@ -9,7 +9,7 @@ class ExpenseRepository:
 
     def __init__(self, file_path):
         """
-        Class constructor
+        Class constructor.
 
         Args:
             file_path: Path to the CSV file, that the expenses are stored in.
