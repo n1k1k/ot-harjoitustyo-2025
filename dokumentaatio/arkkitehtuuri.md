@@ -42,10 +42,51 @@ Tietojen tallennuksesta vastaavat UserRepository ja ExpenseRepository luokat. Us
 ```
 Eli päivämäärä, kategoria, rahamäärä ja käyttäjän käyttäjänimi eroteltuna pilkulla (,).
 
+<br /> 
 
 ## Sovelluksen päätoiminnallisuudet
 
 ### Uuden käyttäjän luominen ja sisäänkirjautuminen
+
+Sovelluksen kontrolli etenee seuraavasti, kun uuden käyttäjän luomisnäkymässä on syötetty uniikki käyttäjätunnus ja salasana ja painettu painiketta “Ceate New Account”:
+
+```mermaid
+sequenceDiagram
+  actor User
+  participant UI
+  participant ExpenseService
+  participant UserRepository
+  participant spongebob
+  User->>UI: click "Create New Account" button
+  UI->>ExpenseService: create_user("SpongeBob", "bob123")
+  ExpenseService->>UserRepository: find_by_username("SpongeBob")
+  UserRepository-->>ExpenseService: None
+  ExpenseService->>spongebob: User("SpongeBob", "bob123")
+  ExpenseService->>UserRepository: create_user(spongebob)
+  UserRepository-->>ExpenseService: user
+  ExpenseService-->>UI: user
+  UI -->> ExpenseService: login(user.username, user.password)
+```
+
+<br /> 
+
+Sovelluksen kontrolli etenee seuraavasti kun kirjautusmisnäkymässä on syötetty olemassaoleva käyttäjätunnus ja salasana ja paneettu painiketta “Login”:
+
+```mermaid
+sequenceDiagram
+  actor User
+  participant UI
+  participant ExpenseService
+  participant UserRepository
+  User->>UI: click "Login" button
+  UI->>ExpenseService: login("SpongeBob", "bob123")
+  ExpenseService->>UserRepository: find_by_username("SpongeBob")
+  UserRepository-->>ExpenseService: user
+  ExpenseService-->>UI: user
+  UI->UI: show_expense_tracker_view()
+  ```
+
+<br /> 
 
 ### Uuden kulun luominen
 
