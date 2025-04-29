@@ -4,7 +4,17 @@ from services.expense_service import expense_service, UsernameExistsError
 
 
 class CreateUserView:
+    """User interface for creating a new user"""
+
     def __init__(self, root, login_view, expense_tracker_view):
+        """Class constructor.
+
+        Args:
+            root: TKinter Tk-application object.
+            login_view: The method called when switching to LoginView.
+            expense_tracker_view: The method called when switching to ExpenseTrackerView.
+        """
+
         self._root = root
         self._frame = None
         self._username_entry = None
@@ -15,9 +25,11 @@ class CreateUserView:
         self._initialise()
 
     def pack(self):
+        """Displays the view."""
         self._frame.pack()
 
     def destroy(self):
+        """Destroys the view."""
         self._frame.destroy()
 
     def _create_user(self):

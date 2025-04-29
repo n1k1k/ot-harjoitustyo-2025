@@ -4,12 +4,27 @@ from ui.expense_tracker_view import ExpenseTrackerView
 
 
 class UI:
+    """
+    Class responsible for the user interface of the application.
+    """
+
     def __init__(self, root):
+        """
+        Class constructor.
+
+        Args:
+            root: TKinter Tk-application object.
+        """
+
         self._root = root
         self._frame = None
         self._current_view = None
 
     def start(self):
+        """
+        Starts the user interface of the application.
+        """
+
         self._show_login_view()
 
     def _hide_current_view(self):

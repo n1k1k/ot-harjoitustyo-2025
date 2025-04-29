@@ -5,11 +5,20 @@ from services.expense_service import expense_service, DeleteError
 
 
 class ExpenseTrackerView:
+    """User interface for displaying the users expenses and managing them."""
+
     def __init__(
         self,
         root,
         login_view,
     ):
+        """Class constructor.
+
+        Args:
+            root: TKinter Tk-application object.
+            login_view: The method called when switching to LoginView.
+        """
+
         self._root = root
         self._login_view = login_view
         self._frame = None
@@ -19,9 +28,11 @@ class ExpenseTrackerView:
         self._initialise()
 
     def pack(self):
+        """Displays the view."""
         self._frame.pack()
 
     def destroy(self):
+        """Destroys the view."""
         if self._toplevel:
             self._toplevel.destroy()
 

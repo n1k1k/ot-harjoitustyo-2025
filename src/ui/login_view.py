@@ -8,7 +8,19 @@ from services.expense_service import (
 
 
 class LoginView:
+    """
+    User interface for login"
+    """
+
     def __init__(self, root, create_user_view, expense_tracker_view):
+        """Class constructor.
+
+        Args:
+            root: TKinter Tk-application object.
+            create_user_view: The method called when switching to CreateUserView.
+            expense_tracker_view: The method called when switching to ExpenseTrackerView.
+        """
+
         self._root = root
         self._frame = None
         self._username_entry = None
@@ -19,9 +31,11 @@ class LoginView:
         self._initialise()
 
     def pack(self):
+        """Displays the view."""
         self._frame.pack()
 
     def destroy(self):
+        """Destroys the view."""
         self._frame.destroy()
 
     def _login(self):
