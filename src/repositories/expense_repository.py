@@ -27,7 +27,7 @@ class ExpenseRepository:
         try:
             df = pd.read_csv(self._file_path)
             df = df.sort_values(by="Date", ascending=False)
-        except:
+        except Exception:
             data = {"Date": [], "Description": [], "Amount": [], "User": []}
 
             df = pd.DataFrame(data)

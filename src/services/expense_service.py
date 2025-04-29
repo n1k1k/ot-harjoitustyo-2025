@@ -55,7 +55,8 @@ class ExpenseService:
 
         Args:
             user_repository: An instance of class UserRepository, that manages user records.
-            expense_repository: An instance of class ExpenseReposiotry, that manages expense records.
+            expense_repository: An instance of class ExpenseReposiotry, that manages
+            expense records.
         """
 
         self._user = None
@@ -101,8 +102,8 @@ class ExpenseService:
 
         try:
             default_expense_repository.delete_one_expense(date, category, amount, user)
-        except:
-            raise DeleteError("Record could not be deleted")
+        except Exception as exc:
+            raise DeleteError("Record could not be deleted") from exc
 
     def login(self, username, password):
         """

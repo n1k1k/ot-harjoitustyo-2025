@@ -65,7 +65,10 @@ class ExpenseTrackerView:
         try:
             float(amount)
         except:
-            messagebox.showerror("Error", "Amount must be a number")
+            messagebox.showerror(
+                "Error",
+                "Amount must be a number and the decimal separator a dot (.)",
+            )
             return
 
         try:
@@ -96,7 +99,10 @@ class ExpenseTrackerView:
         try:
             float(amount)
         except:
-            messagebox.showerror("Error", "Amount must be a number")
+            messagebox.showerror(
+                "Error",
+                "Amount must be a number and the decimal separator a dot (.)",
+            )
             return
 
         try:
