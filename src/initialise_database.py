@@ -2,6 +2,13 @@ from database_connection import get_database_connection
 
 
 def drop_tables(db):
+    """
+    Deletes table users if it exists.
+
+    Args:
+        db: A sqlite3.Connection object.
+    """
+
     cursor = db.cursor()
 
     cursor.execute(
@@ -14,6 +21,13 @@ def drop_tables(db):
 
 
 def create_tables(db):
+    """
+    Creates table users.
+
+    Args:
+        db: A sqlite3.Connection object.
+    """
+
     cursor = db.cursor()
 
     cursor.execute(
@@ -29,6 +43,10 @@ def create_tables(db):
 
 
 def initialise_database():
+    """
+    Initialises the database tables.
+    """
+
     db = get_database_connection()
 
     drop_tables(db)
