@@ -14,4 +14,5 @@
 |  27.4   |   1  | Kulujen poistamis-ominaisuuden toteuttaminen | 
 |  28.4   |   1  | Kulujen muokkaus-ominaisuuden toteuttaminen | 
 |     |   1  | Käyttöohjeen kirjoittaminen | 
-| Yhteensä   | 17.5  | |
+|   29.4  |   1.5  | Arkkitehtuurikuvauksen kirjoittaminen | 
+| Yhteensä   | 19  | |
