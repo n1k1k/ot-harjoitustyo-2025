@@ -50,7 +50,7 @@ class CreateUserView:
                 messagebox.showerror("Error", f'Username "{username}" is already taken')
 
     def _initialise(self):
-        self._root.geometry("650x400")
+        self._root.geometry("650x450")
         self._root.configure(bg="#333333")
 
         s = Style()
@@ -78,7 +78,6 @@ class CreateUserView:
         create_label.configure(anchor="center")
         create_label.grid(row=1, column=0, columnspan=2, pady=(0, 40))
 
-        # Initialise username field
         username_label = ttk.Label(
             master=self._frame,
             text="Username",
@@ -91,7 +90,6 @@ class CreateUserView:
         self._username_entry = Entry(master=self._frame)
         self._username_entry.grid(row=2, column=1, padx=5)
 
-        # Initialise password field
         password_label = ttk.Label(
             master=self._frame,
             text="Password",
@@ -99,12 +97,11 @@ class CreateUserView:
             foreground="white",
             font=["Arial", 16],
         )
-        # password_label.configure(style="My.TFrame")
+
         password_label.grid(row=3, column=0, pady=20, padx=5)
         self._password_entry = Entry(master=self._frame, show="*")
         self._password_entry.grid(row=3, column=1)
 
-        # Buttons
         login_button = Button(
             master=self._frame,
             text="Back to Login",

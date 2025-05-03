@@ -294,7 +294,7 @@ class ExpenseTrackerView:
         edit_expense_button.grid(row=3, column=0, columnspan=2, pady=(40, 20))
 
     def _initialise(self):
-        self._root.geometry("650x400")
+        self._root.geometry("650x450")
         self._root.configure(bg="#333333")
 
         s = Style()
@@ -304,7 +304,7 @@ class ExpenseTrackerView:
 
         from_date_label = ttk.Label(
             master=self._frame,
-            text="from",
+            text="From",
             background="#333333",
             foreground="white",
             font=["Arial", 11],
@@ -316,7 +316,7 @@ class ExpenseTrackerView:
 
         to_date_label = ttk.Label(
             master=self._frame,
-            text="to",
+            text="To:",
             background="#333333",
             foreground="white",
             font=["Arial", 11],
@@ -329,8 +329,16 @@ class ExpenseTrackerView:
         apply_button = Button(
             master=self._frame,
             text="Apply",
-            background="#20bd65",
+            background="#ddf542",
             command=self._apply,
+            foreground="black",
+        )
+
+        clear_button = Button(
+            master=self._frame,
+            text="Clear",
+            background="lightgray",
+            command=self._change_expense_records,
             foreground="black",
         )
 
@@ -405,16 +413,17 @@ class ExpenseTrackerView:
             foreground="black",
         )
 
-        from_date_label.grid(row=0, column=0, pady=10)
-        self._from_date_entry.grid(row=0, column=1)
+        from_date_label.grid(row=0, column=0, pady=25)
+        self._from_date_entry.grid(row=0, column=1, stick="w")
         to_date_label.grid(row=0, column=2)
-        self._to_date_entry.grid(row=0, column=3)
+        self._to_date_entry.grid(row=0, column=3, stick="w")
         apply_button.grid(row=0, column=4)
-        frame.grid(row=1, column=0, columnspan=5, padx=5, pady=0)
+        clear_button.grid(row=0, column=5)
+        frame.grid(row=1, column=0, columnspan=6, padx=5, pady=0)
         self._expense_tree.pack(side="left")
         scrollbar.pack(side="right", fill="y")
-        expense_total.grid(row=2, column=0, columnspan=5, sticky="ew", padx=5)
+        expense_total.grid(row=2, column=0, columnspan=6, sticky="ew", padx=5)
         add_expense_button.grid(row=3, column=0, pady=(15, 20))
         edit_expense_button.grid(row=3, column=1)
         delete_expense_button.grid(row=3, column=2)
-        logout_button.grid(row=3, column=4)
+        logout_button.grid(row=3, column=5)
