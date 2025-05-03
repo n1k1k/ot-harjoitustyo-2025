@@ -24,6 +24,7 @@ class ExpenseTrackerView:
         self._frame = None
         self._toplevel = None
         self._user = expense_service.get_current_user()
+        self._expenses = expense_service.get_expenses()
 
         self._initialise()
 
@@ -47,6 +48,7 @@ class ExpenseTrackerView:
 
     def _change_expense_records(self):
         self._frame.destroy()
+        self._expenses = expense_service.get_expenses()
         self._initialise()
         self.pack()
 
@@ -129,7 +131,18 @@ class ExpenseTrackerView:
             messagebox.showerror("Error", "Record was not deleted. Try again!")
 
     def _apply(self):
-        pass
+        from_date = self._from_date_entry.get_date()
+        to_date = self._to_date_entry.get_date()
+        self._expenses = expense_service.get_expenses_filtered_by_date(
+            from_date, to_date
+        )
+
+        self._frame.destroy()
+        self._initialise()
+        self.pack()
+
+        self._from_date_entry.set_date(from_date)
+        self._to_date_entry.set_date(to_date)
 
     def _add_expense_window(self):
         self._toplevel = Toplevel(self._root)
@@ -296,8 +309,9 @@ class ExpenseTrackerView:
             font=["Arial", 11],
         )
         self._from_date_entry = DateEntry(
-            master=self._frame, locale="en_US", date_pattern="yyyy-mm-dd"
+            master=self._frame, locale="en_US", date_pattern="yyyy-mm-dd", day=1
         )
+        self._from_date_entry.delete(0, "end")
 
         to_date_label = ttk.Label(
             master=self._frame,
@@ -306,9 +320,10 @@ class ExpenseTrackerView:
             foreground="white",
             font=["Arial", 11],
         )
-        self._to_from_date_entry = DateEntry(
+        self._to_date_entry = DateEntry(
             master=self._frame, locale="en_US", date_pattern="yyyy-mm-dd"
         )
+        self._to_date_entry.delete(0, "end")
 
         apply_button = Button(
             master=self._frame,
@@ -340,9 +355,7 @@ class ExpenseTrackerView:
         )
         self._expense_tree.configure(yscrollcommand=scrollbar.set)
 
-        expenses = expense_service.get_expenses()
-
-        for index, row in expenses.iterrows():
+        for index, row in self._expenses.iterrows():
             amount = row["Amount"]
             i = index + 1
             self._expense_tree.insert(
@@ -395,7 +408,7 @@ class ExpenseTrackerView:
         from_date_label.grid(row=0, column=0, pady=10)
         self._from_date_entry.grid(row=0, column=1)
         to_date_label.grid(row=0, column=2)
-        self._to_from_date_entry.grid(row=0, column=3)
+        self._to_date_entry.grid(row=0, column=3)
         apply_button.grid(row=0, column=4)
         frame.grid(row=1, column=0, columnspan=5, padx=5, pady=0)
         self._expense_tree.pack(side="left")

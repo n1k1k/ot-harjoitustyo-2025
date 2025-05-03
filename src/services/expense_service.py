@@ -84,6 +84,15 @@ class ExpenseService:
         expenses = self._expense_repository.expenses_by_user(self._user)
         return expenses
 
+    def get_expenses_filtered_by_date(self, from_date, to_date):
+
+        user = self.get_current_user()
+        expenses = self._expense_repository.expenses_by_user_filtered_by_date(
+            user, from_date, to_date
+        )
+
+        return expenses
+
     def get_expense_sum(self):
         """
         Fetches the total sum of expenses for the user that is currently logged-in.
