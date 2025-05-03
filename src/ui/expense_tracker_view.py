@@ -310,7 +310,7 @@ class ExpenseTrackerView:
             font=["Arial", 11],
         )
         self._from_date_entry = DateEntry(
-            master=self._frame, locale="en_US", date_pattern="yyyy-mm-dd", day=1
+            master=self._frame, locale="en_US", date_pattern="yyyy-mm-dd"
         )
         self._from_date_entry.delete(0, "end")
 
