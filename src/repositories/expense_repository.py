@@ -52,6 +52,13 @@ class ExpenseRepository:
         return user_expenses
 
     def expense_sum(self, user):
+        """
+        Calculates the sum of expenses for a specified user.
+
+        Returns:
+            Sum of expenses for the given user.
+        """
+
         expenses = self.expenses_by_user(user)
 
         return expenses.Amount.sum()

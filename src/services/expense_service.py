@@ -85,6 +85,12 @@ class ExpenseService:
         return expenses
 
     def get_expense_sum(self):
+        """
+        Fetches the total sum of expenses for the user that is currently logged-in.
+
+        Returns:
+            Total sum of expenses for the logged-in user.
+        """
 
         user = self.get_current_user()
 
