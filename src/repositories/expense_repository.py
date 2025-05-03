@@ -54,20 +54,21 @@ class ExpenseRepository:
     def expenses_by_user_filtered_by_date(self, user, from_date, to_date):
         from_date = pd.to_datetime(from_date)
         to_date = pd.to_datetime(to_date)
+
         expenses = self.expenses_by_user(user)
 
         expenses["Date"] = pd.to_datetime(expenses["Date"], errors="coerce")
         expenses.set_index("Date", inplace=True)
 
-        print("Min date in index:", expenses.index.min())
-        print("Max date in index:", expenses.index.max())
-
         mask = (expenses.index >= from_date) & (expenses.index <= to_date)
         filtered_expenses = expenses[mask]
 
         filtered_expenses = filtered_expenses.reset_index()
+        filtered_expenses["Date"] = filtered_expenses["Date"].dt.strftime(r"%Y-%m-%d")
 
-        return filtered_expenses
+        sum = filtered_expenses.Amount.sum()
+
+        return (filtered_expenses, sum)
 
     def expense_sum(self, user):
         """

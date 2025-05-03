@@ -25,6 +25,7 @@ class ExpenseTrackerView:
         self._toplevel = None
         self._user = expense_service.get_current_user()
         self._expenses = expense_service.get_expenses()
+        self._sum = expense_service.get_expense_sum()
 
         self._initialise()
 
@@ -49,6 +50,7 @@ class ExpenseTrackerView:
     def _change_expense_records(self):
         self._frame.destroy()
         self._expenses = expense_service.get_expenses()
+        self._sum = expense_service.get_expense_sum()
         self._initialise()
         self.pack()
 
@@ -133,14 +135,13 @@ class ExpenseTrackerView:
     def _apply(self):
         from_date = self._from_date_entry.get_date()
         to_date = self._to_date_entry.get_date()
-        self._expenses = expense_service.get_expenses_filtered_by_date(
+        self._expenses, self._sum = expense_service.get_expenses_filtered_by_date(
             from_date, to_date
         )
 
         self._frame.destroy()
         self._initialise()
         self.pack()
-
         self._from_date_entry.set_date(from_date)
         self._to_date_entry.set_date(to_date)
 
@@ -365,10 +366,9 @@ class ExpenseTrackerView:
                 values=(row["Date"], row["Description"], f"{amount:.2f}"),
             )
 
-        sum = expense_service.get_expense_sum()
         expense_total = ttk.Label(
             self._frame,
-            text=f" Total: {sum:.2f}",
+            text=f" Total: {self._sum:.2f}",
             background="lightgray",
             foreground="black",
         )

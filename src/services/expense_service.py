@@ -87,11 +87,11 @@ class ExpenseService:
     def get_expenses_filtered_by_date(self, from_date, to_date):
 
         user = self.get_current_user()
-        expenses = self._expense_repository.expenses_by_user_filtered_by_date(
+        expenses, sum = self._expense_repository.expenses_by_user_filtered_by_date(
             user, from_date, to_date
         )
 
-        return expenses
+        return (expenses, sum)
 
     def get_expense_sum(self):
         """
