@@ -310,13 +310,13 @@ class ExpenseTrackerView:
         expenses = expense_service.get_expenses()
 
         for index, row in expenses.iterrows():
-            num = index + 1
-            i = str(num)
+            amount = row["Amount"]
+            i = index + 1
             self._expense_tree.insert(
                 "",
                 "end",
-                text=i,
-                values=(row["Date"], row["Description"], row["Amount"]),
+                text=str(i),
+                values=(row["Date"], row["Description"], f"{amount:.2f}"),
             )
 
         sum = expense_service.get_expense_sum()
