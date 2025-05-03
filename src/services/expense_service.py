@@ -85,6 +85,17 @@ class ExpenseService:
         return expenses
 
     def get_expenses_filtered_by_date(self, from_date, to_date):
+        """
+        Filters the expenses of the currently logged-in user based on the given dates.
+
+        Args:
+            from_date: Beginning date.Can be str or Pandas timestamp object.
+            to_date: End date. Can be str or Pandas timestamp object.
+
+        Returns:
+            Tuple where the first element is the filtered expenses and the
+            second element is the sum of the filtered expenses.
+        """
 
         user = self.get_current_user()
         expenses, sum = self._expense_repository.expenses_by_user_filtered_by_date(

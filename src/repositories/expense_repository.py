@@ -52,6 +52,19 @@ class ExpenseRepository:
         return user_expenses
 
     def expenses_by_user_filtered_by_date(self, user, from_date, to_date):
+        """
+        Filters the expenses of a specified user based on the given dates.
+
+        Args:
+            user: An instance of class User.
+            from_date: Beginning date. Can be str or Pandas timestamp object.
+            to_date: End date. Can be str or Pandas timestamp object.
+
+        Returns:
+            Tuple where the first element is the filtered expenses and the
+            second element is the sum of the filtered expenses.
+        """
+
         from_date = pd.to_datetime(from_date)
         to_date = pd.to_datetime(to_date)
 
