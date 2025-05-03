@@ -15,3 +15,6 @@ Olin kipeänä, joten valitettavasti kykenin vain hieman aloittamaan kulujen seu
 ## Viikko 6
 - Käyttäjä voi poistaa kulun.
 - Käyttäjä voi muokata olemassa olevaa kulua.
+
+## Viikko 7
+- Käyttäjä näkee kulujen summan.

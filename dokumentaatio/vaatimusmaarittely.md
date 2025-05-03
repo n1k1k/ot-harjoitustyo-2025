@@ -22,7 +22,7 @@ Sovelluksessa on vain yksi käyttäjärooli: normaali käyttäjä.
 - Käyttäjä voi lisätä uuden kulun. :white_check_mark:
 - Käyttäjä näkee listan omista kuluistaan. :white_check_mark:
 - Käyttäjä näkee yhteenvedon kuluistaan.
-    - Kulujen kokonaissumma
+    - Kulujen kokonaissumma :white_check_mark:
     - Kategoriakohtainen jakautuminen (ruoka, asuminen, vapaa-aika jne.)
 - Käyttäjä voi poistaa olemassa olevia kuluja. :white_check_mark:
 - Käyttäjä voi muokata  olemassa olevia kuluja. :white_check_mark:

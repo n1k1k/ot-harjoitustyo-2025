@@ -16,4 +16,5 @@
 |     |   1  | Käyttöohjeen kirjoittaminen | 
 |   29.4  |   1.5  | Arkkitehtuurikuvauksen kirjoittaminen | 
 |     |   1.5  | Docstring | 
-| Yhteensä   | 20.5  | |
+|  3.5 |   0.5  | Lisäsin kulujen kokonaissumman näkymään. | 
+| Yhteensä   | 21  | |
