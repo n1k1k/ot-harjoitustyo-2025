@@ -285,7 +285,7 @@ class ExpenseTrackerView:
 
         self._frame = ttk.Frame(master=self._root, style="TFrame")
 
-        frame = ttk.Frame(self._frame)
+        frame = ttk.Frame(self._frame, width=60)
 
         self._expense_tree = ttk.Treeview(
             frame,
@@ -320,7 +320,12 @@ class ExpenseTrackerView:
             )
 
         sum = expense_service.get_expense_sum()
-        expense_total = ttk.Label(self._frame, text=f"Total: {sum:.2f}")
+        expense_total = ttk.Label(
+            self._frame,
+            text=f" Total: {sum:.2f}",
+            background="lightgray",
+            foreground="black",
+        )
 
         add_expense_button = Button(
             master=self._frame,
@@ -354,10 +359,10 @@ class ExpenseTrackerView:
             foreground="black",
         )
 
-        frame.grid(row=1, column=0, columnspan=4, padx=5, pady=(20, 15))
+        frame.grid(row=1, column=0, columnspan=4, padx=5, pady=(20, 0))
         self._expense_tree.pack(side="left")
         scrollbar.pack(side="right", fill="y")
-        expense_total.grid(row=2, column=0)
+        expense_total.grid(row=2, column=0, columnspan=4, sticky="ew", padx=5)
         add_expense_button.grid(row=3, column=0, pady=(15, 20))
         edit_expense_button.grid(row=3, column=1)
         delete_expense_button.grid(row=3, column=2)
