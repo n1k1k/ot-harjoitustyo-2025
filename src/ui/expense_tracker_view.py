@@ -128,6 +128,9 @@ class ExpenseTrackerView:
         except DeleteError:
             messagebox.showerror("Error", "Record was not deleted. Try again!")
 
+    def _apply(self):
+        pass
+
     def _add_expense_window(self):
         self._toplevel = Toplevel(self._root)
         self._toplevel.geometry("340x250")
@@ -285,6 +288,36 @@ class ExpenseTrackerView:
 
         self._frame = ttk.Frame(master=self._root, style="TFrame")
 
+        from_date_label = ttk.Label(
+            master=self._frame,
+            text="from",
+            background="#333333",
+            foreground="white",
+            font=["Arial", 11],
+        )
+        self._from_date_entry = DateEntry(
+            master=self._frame, locale="en_US", date_pattern="yyyy-mm-dd"
+        )
+
+        to_date_label = ttk.Label(
+            master=self._frame,
+            text="to",
+            background="#333333",
+            foreground="white",
+            font=["Arial", 11],
+        )
+        self._to_from_date_entry = DateEntry(
+            master=self._frame, locale="en_US", date_pattern="yyyy-mm-dd"
+        )
+
+        apply_button = Button(
+            master=self._frame,
+            text="Apply",
+            background="#20bd65",
+            command=self._apply,
+            foreground="black",
+        )
+
         frame = ttk.Frame(self._frame, width=60)
 
         self._expense_tree = ttk.Treeview(
@@ -359,11 +392,16 @@ class ExpenseTrackerView:
             foreground="black",
         )
 
-        frame.grid(row=1, column=0, columnspan=4, padx=5, pady=(20, 0))
+        from_date_label.grid(row=0, column=0, pady=10)
+        self._from_date_entry.grid(row=0, column=1)
+        to_date_label.grid(row=0, column=2)
+        self._to_from_date_entry.grid(row=0, column=3)
+        apply_button.grid(row=0, column=4)
+        frame.grid(row=1, column=0, columnspan=5, padx=5, pady=0)
         self._expense_tree.pack(side="left")
         scrollbar.pack(side="right", fill="y")
-        expense_total.grid(row=2, column=0, columnspan=4, sticky="ew", padx=5)
+        expense_total.grid(row=2, column=0, columnspan=5, sticky="ew", padx=5)
         add_expense_button.grid(row=3, column=0, pady=(15, 20))
         edit_expense_button.grid(row=3, column=1)
         delete_expense_button.grid(row=3, column=2)
-        logout_button.grid(row=3, column=3)
+        logout_button.grid(row=3, column=4)
