@@ -51,6 +51,11 @@ class ExpenseRepository:
 
         return user_expenses
 
+    def expense_sum(self, user):
+        expenses = self.expenses_by_user(user)
+
+        return expenses.Amount.sum()
+
     def add_expense(self, date, description, amount, user):
         """
         Adds a new expense to the CSV file.

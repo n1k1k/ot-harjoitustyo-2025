@@ -81,8 +81,14 @@ class ExpenseService:
             A pandas DataFrame containing the user's expenses if user logged-in, otherwise None.
         """
 
-        expense_df = self._expense_repository.expenses_by_user(self._user)
-        return expense_df
+        expenses = self._expense_repository.expenses_by_user(self._user)
+        return expenses
+
+    def get_expense_sum(self):
+
+        user = self.get_current_user()
+
+        return self._expense_repository.expense_sum(user)
 
     def create_expense(self, date, description, amount):
         """

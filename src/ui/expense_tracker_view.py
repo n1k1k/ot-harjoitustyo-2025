@@ -1,4 +1,4 @@
-from tkinter import ttk, Button, messagebox, CENTER, BOTH, Y, Toplevel, constants
+from tkinter import ttk, Button, messagebox, CENTER, Toplevel, constants
 from tkinter.ttk import Style
 from tkcalendar import DateEntry
 from services.expense_service import expense_service, DeleteError
@@ -45,7 +45,7 @@ class ExpenseTrackerView:
 
         return selection
 
-    def _new_expense_handler(self):
+    def _change_expense_records(self):
         self._frame.destroy()
         self._initialise()
         self.pack()
@@ -73,7 +73,7 @@ class ExpenseTrackerView:
 
         try:
             expense_service.create_expense(date, description, amount)
-            self._new_expense_handler()
+            self._change_expense_records()
         except:
             messagebox.showerror("Error", "Try Again")
 
@@ -108,7 +108,7 @@ class ExpenseTrackerView:
         try:
             expense_service.create_expense(date, description, amount)
             self._delete_expense()
-            self._new_expense_handler()
+            self._change_expense_records()
             self._toplevel.destroy()
         except:
             messagebox.showerror("Error", "Try Again")
@@ -124,7 +124,7 @@ class ExpenseTrackerView:
 
         try:
             expense_service.delete_expense(date, category, amount)
-            self._expense_tree.delete(selection)
+            self._change_expense_records()
         except DeleteError:
             messagebox.showerror("Error", "Record was not deleted. Try again!")
 
@@ -319,6 +319,9 @@ class ExpenseTrackerView:
                 values=(row["Date"], row["Description"], row["Amount"]),
             )
 
+        sum = expense_service.get_expense_sum()
+        expense_total = ttk.Label(self._frame, text=f"Total: {sum:.2f}")
+
         add_expense_button = Button(
             master=self._frame,
             text="Add Expense",
@@ -351,10 +354,11 @@ class ExpenseTrackerView:
             foreground="black",
         )
 
-        frame.grid(row=1, column=0, columnspan=4, padx=5, pady=(20, 10))
+        frame.grid(row=1, column=0, columnspan=4, padx=5, pady=(20, 15))
         self._expense_tree.pack(side="left")
         scrollbar.pack(side="right", fill="y")
-        add_expense_button.grid(row=2, column=0, pady=20)
-        edit_expense_button.grid(row=2, column=1)
-        delete_expense_button.grid(row=2, column=2)
-        logout_button.grid(row=2, column=3)
+        expense_total.grid(row=2, column=0)
+        add_expense_button.grid(row=3, column=0, pady=(15, 20))
+        edit_expense_button.grid(row=3, column=1)
+        delete_expense_button.grid(row=3, column=2)
+        logout_button.grid(row=3, column=3)
