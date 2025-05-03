@@ -28,7 +28,8 @@ Sovelluksessa on vain yksi käyttäjärooli: normaali käyttäjä.
 - Käyttäjä voi muokata  olemassa olevia kuluja. :white_check_mark:
 
 ## Jatkokehitysideoita
-- Kulujen suodatus ja lajittelu esimerkiksi kategorian tai päivämäärän perusteella.
+- Kulujen suodatus perusteella. :white_check_mark:
+- Kulujen esimerkiksi kategorian perusteella.
 - Käyttäjä voi asetttaa budjetin eri kulukategorioille ja nähdä, kuinka paljon rahaa on vielä käytettävissä.
 - Visuaaliset kaaviot kulutuksen jakautumisesta eri kategorioihin.
 

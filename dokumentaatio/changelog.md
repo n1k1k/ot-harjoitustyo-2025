@@ -18,3 +18,4 @@ Olin kipeänä, joten valitettavasti kykenin vain hieman aloittamaan kulujen seu
 
 ## Viikko 7
 - Käyttäjä näkee kulujen summan.
+- Käyttäjä voi suodattaa kulujaan päivämäärien perusteella

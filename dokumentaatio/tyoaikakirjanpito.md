@@ -17,4 +17,5 @@
 |   29.4  |   1.5  | Arkkitehtuurikuvauksen kirjoittaminen | 
 |     |   1.5  | Docstring | 
 |  3.5 |   0.5  | Lisäsin kulujen kokonaissumman näkymään. | 
-| Yhteensä   | 21  | |
+|   |   2  | Toteutin kulujen suodatuksen päivämäärien perusteella. | 
+| Yhteensä   | 23  | |
