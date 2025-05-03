@@ -85,6 +85,19 @@ class ExpenseService:
         return expense_df
 
     def create_expense(self, date, description, amount):
+        """
+        Creates a new expense.
+
+        Args:
+            date: Date of the expense.
+            category: Description (category) of the expense.
+            amount: Amount spent.
+
+
+        Returns:
+            The created expense
+        """
+
         user = self.get_current_user()
         return self._expense_repository.add_expense(date, description, amount, user)
 
@@ -96,6 +109,9 @@ class ExpenseService:
             date: Date of the expense.
             category: Description (category) of the expense.
             amount: Amount spent.
+
+        Raises:
+            DeleteError if the record could not be deleted.
         """
 
         user = self.get_current_user().username
@@ -117,7 +133,8 @@ class ExpenseService:
             The authenticated user if user found and password matches.
 
         Raises:
-
+            AuthenticationError is the given password does not match the one on
+            record or UserNotFounError if the given username does not exist.
         """
 
         user = self._user_repository.find_by_username(username)
