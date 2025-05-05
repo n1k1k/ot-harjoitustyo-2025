@@ -25,7 +25,7 @@ class TestUserRepository(unittest.TestCase):
 
         self.assertEqual(found_user.username, self._test_user.username)
 
-    def test_find_by_username_returns_False_if_user_does_no_exist(self):
+    def test_find_by_username_with_nonexistent_username(self):
         found_user = user_repository.find_by_username("test")
 
         self.assertFalse(found_user)
