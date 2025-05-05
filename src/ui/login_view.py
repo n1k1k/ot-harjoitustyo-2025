@@ -42,16 +42,19 @@ class LoginView:
         username = self._username_entry.get()
         password = self._password_entry.get()
 
-        try:
-            expense_service.login(username, password)
-            self._expense_tracker_view()
-        except AuthenticationError:
-            messagebox.showerror("Error", "Wrong password. Try again!")
-        except UserNotFoundError:
-            messagebox.showerror("Error", "Username not found. Try again!")
+        if len(username) == 0 or len(password) == 0:
+            messagebox.showerror("Error", "Both Username and password are required")
+        else:
+            try:
+                expense_service.login(username, password)
+                self._expense_tracker_view()
+            except AuthenticationError:
+                messagebox.showerror("Error", "Wrong password. Try again!")
+            except UserNotFoundError:
+                messagebox.showerror("Error", "Username not found. Try again!")
 
     def _initialise(self):
-        self._root.geometry("650x450")
+        self._root.geometry("670x450")
         self._root.configure(bg="#333333")
 
         s = Style()
@@ -67,7 +70,7 @@ class LoginView:
             font=["Arial", 30],
         )
         login_label.configure(anchor="center")
-        login_label.grid(row=0, column=0, columnspan=2, pady=40)
+        login_label.grid(row=0, column=0, columnspan=2, pady=(50, 40))
 
         username_label = ttk.Label(
             master=self._frame,
@@ -100,13 +103,13 @@ class LoginView:
             background="#20bd65",
             foreground="black",
         )
-        login_button.grid(row=3, column=0, columnspan=2, pady=15)
+        login_button.grid(row=3, column=0, columnspan=2, pady=(30, 15))
 
         create_user_button = Button(
             master=self._frame,
             text="Create New Account",
             command=self._create_user_view,
-            background="#20bd65",
+            background="#60a9eb",
             foreground="black",
         )
-        create_user_button.grid(row=4, column=0, columnspan=2, pady=5)
+        create_user_button.grid(row=4, column=0, columnspan=2, pady=10)

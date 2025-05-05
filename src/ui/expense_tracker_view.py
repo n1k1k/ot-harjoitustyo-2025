@@ -162,7 +162,10 @@ class ExpenseTrackerView:
             font=["Arial", 11],
         )
         self._date_entry = DateEntry(
-            master=toplevel_frame, locale="en_US", date_pattern="dd/mm/yyyy"
+            master=toplevel_frame,
+            locale="en_US",
+            date_pattern="dd/mm/yyyy",
+            state="readonly",
         )
 
         category_label = ttk.Label(
@@ -294,7 +297,7 @@ class ExpenseTrackerView:
         edit_expense_button.grid(row=3, column=0, columnspan=2, pady=(40, 20))
 
     def _initialise(self):
-        self._root.geometry("650x450")
+        self._root.geometry("670x450")
         self._root.configure(bg="#333333")
 
         s = Style()
@@ -304,13 +307,15 @@ class ExpenseTrackerView:
 
         from_date_label = ttk.Label(
             master=self._frame,
-            text="From",
+            text="From:",
             background="#333333",
             foreground="white",
             font=["Arial", 11],
         )
         self._from_date_entry = DateEntry(
-            master=self._frame, locale="en_US", date_pattern="yyyy-mm-dd"
+            master=self._frame,
+            locale="en_US",
+            date_pattern="yyyy-mm-dd",
         )
         self._from_date_entry.delete(0, "end")
 
@@ -322,14 +327,16 @@ class ExpenseTrackerView:
             font=["Arial", 11],
         )
         self._to_date_entry = DateEntry(
-            master=self._frame, locale="en_US", date_pattern="yyyy-mm-dd"
+            master=self._frame,
+            locale="en_US",
+            date_pattern="yyyy-mm-dd",
         )
         self._to_date_entry.delete(0, "end")
 
         apply_button = Button(
             master=self._frame,
             text="Apply",
-            background="#ddf542",
+            background="#60a9eb",
             command=self._apply,
             foreground="black",
         )
@@ -357,7 +364,7 @@ class ExpenseTrackerView:
         self._expense_tree.column("# 2", anchor=CENTER)
         self._expense_tree.heading("# 2", text="Category")
         self._expense_tree.column("# 3", anchor=CENTER)
-        self._expense_tree.heading("# 3", text="Amount (€)")
+        self._expense_tree.heading("# 3", text="Amount")
 
         scrollbar = ttk.Scrollbar(
             frame, orient="vertical", command=self._expense_tree.yview
@@ -365,18 +372,17 @@ class ExpenseTrackerView:
         self._expense_tree.configure(yscrollcommand=scrollbar.set)
 
         for index, row in self._expenses.iterrows():
-            amount = row["Amount"]
             i = index + 1
             self._expense_tree.insert(
                 "",
                 "end",
                 text=str(i),
-                values=(row["Date"], row["Description"], f"{amount:.2f}"),
+                values=(row["Date"], row["Description"], row["Amount"]),
             )
 
         expense_total = ttk.Label(
             self._frame,
-            text=f" Total: {self._sum:.2f}",
+            text=f" Total: {self._sum}",
             background="lightgray",
             foreground="black",
         )
@@ -409,7 +415,7 @@ class ExpenseTrackerView:
             master=self._frame,
             text="Log out",
             command=self._logout,
-            background="gray",
+            background="lightgray",
             foreground="black",
         )
 

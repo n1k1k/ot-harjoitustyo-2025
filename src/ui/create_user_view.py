@@ -50,7 +50,7 @@ class CreateUserView:
                 messagebox.showerror("Error", f'Username "{username}" is already taken')
 
     def _initialise(self):
-        self._root.geometry("650x450")
+        self._root.geometry("670x450")
         self._root.configure(bg="#333333")
 
         s = Style()
@@ -106,7 +106,7 @@ class CreateUserView:
             master=self._frame,
             text="Back to Login",
             command=self._login_view,
-            background="#797f85",
+            background="lightgray",
             foreground="black",
         )
         login_button.grid(row=5, column=0, columnspan=2)
@@ -115,7 +115,7 @@ class CreateUserView:
             master=self._frame,
             text="Create New Account",
             command=self._create_user,
-            background="#20bd65",
+            background="#60a9eb",
             foreground="black",
         )
-        create_user_button.grid(row=4, column=0, columnspan=2, pady=(15, 20))
+        create_user_button.grid(row=4, column=0, columnspan=2, pady=(35, 25))

@@ -169,6 +169,9 @@ class ExpenseService:
             record or UserNotFounError if the given username does not exist.
         """
 
+        username = str(username)
+        password = str(password)
+
         user = self._user_repository.find_by_username(username)
 
         if not user:
@@ -200,6 +203,9 @@ class ExpenseService:
             The instance of class User that was created.
 
         """
+
+        username = str(username)
+        password = str(password)
 
         check_username = self._user_repository.find_by_username(username)
 
