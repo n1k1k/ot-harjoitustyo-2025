@@ -13,6 +13,7 @@ Sovellus mahdollistaa käyttäjälle omien kulujensa seurannan ja hallinnan. Rek
 - [Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
 - [Changelog](dokumentaatio/changelog.md)
 - [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
+- [Testaus](dokumentaatio/testaus.md)
 
 <br/>
 
