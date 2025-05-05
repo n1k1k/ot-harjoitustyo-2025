@@ -8,7 +8,7 @@ Ohjelman osien suhdetta kuvaava luokka/pakkauskaavio:
 
 ## Sovelluslogiikka
 
-Sovelluksen tominnasta vastaa ExpenseService luokan olio. 
+Sovelluksen tominnasta vastaa [ExpenseService](https://github.com/n1k1k/ot-harjoitustyo-2025/blob/main/src/services/expense_service.py) luokan olio. 
 Luokka tarjoaa käyttöliittymälle seuraavat metodit:
 
 - `login(username, password)`
@@ -19,7 +19,7 @@ Luokka tarjoaa käyttöliittymälle seuraavat metodit:
 - `create_expense(date, category, amount)`
 - `delete_expense(date, category, amount)`
 
-ExpenseService käyttää kulujen ja käyttäjien tietojen tallennukseen ExpenseRepository ja UserReposiotory luokkia. Näiden luokkien oliot injektoidaan ExpenseService-luokalle konstruktorikutsun yhteydessä.
+ExpenseService käyttää kulujen ja käyttäjien tietojen tallennukseen [ExpenseRepository](https://github.com/n1k1k/ot-harjoitustyo-2025/blob/main/src/repositories/expense_repository.py) ja [UserReposiotory](https://github.com/n1k1k/ot-harjoitustyo-2025/blob/main/src/repositories/user_repository.py) luokkia. Näiden luokkien oliot injektoidaan ExpenseService-luokalle konstruktorikutsun yhteydessä.
 
 ## Käyttöliittymä
 
