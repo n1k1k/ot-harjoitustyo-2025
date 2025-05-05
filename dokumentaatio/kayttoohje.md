@@ -67,6 +67,10 @@ Jos kulua haluaa muokata tai jos sen haluaa poistaa, tulee se ensin valita klikk
 
 Valitun kulun voi poistaa painamalla punaista “Delete” painiketta. Kulua voi muokata painamalla keltaista “Edit” painiketta, jolloin avautuu uusi ikkuna, jossa kulua voi muokata samaan tapaan kuin uuden kulun luomisessa.
 
+### Kulujen suodattaminen päivämäärän perusteella
+
+Kuluja voi suodattaa antamalla From -kenttään alkupäivämäärän ja To-kenttään loppupäivämäärän ja painamalla "apply" painiketta. Molempien kenttien oletusarvona on nykyinen päivämäärä. Suodatuksen voi nollata painamalla "clear" painiketta.
+
 ### Uloskirjautuminen
 
 Sovelluksesta voi kirjautua ulos painamalla oikeassa alakulmassa olevaa harmaata “Log out” painiketta. Tällöin sovellus siirtyy sisäänkirjautumisnäkymään.
