@@ -12,24 +12,22 @@ Sovelluksessa on vain yksi käyttäjärooli: normaali käyttäjä.
 
 ### Ennen kirjautumista
 
-- Käyttäjä voi luoda käyttäjätunnuksen järjestelmään. :white_check_mark:
+- Käyttäjä voi luoda käyttäjätunnuksen järjestelmään. 
     - Käyttäjätunnuksen on täytettävä vähimmäisvaatimukset (vähintään 3 merkkiä pitkä ja sen on  oltava yksilöllinen)
-- Käyttäjä voi kirjautua järjestelmään. :white_check_mark:
+    - Myös salasanan tulee olla vähintään 3 merkkiä pitkä.
+- Käyttäjä voi kirjautua järjestelmään.
     - Jos käyttäjätunnusta ei ole olemassa tai salasana on väärä, järjestelmä ilmoittaa tästä käyttäjälle.
 
 ### Kirjautumisen jälkeen
 
-- Käyttäjä voi lisätä uuden kulun. :white_check_mark:
-- Käyttäjä näkee listan omista kuluistaan. :white_check_mark:
-- Käyttäjä näkee yhteenvedon kuluistaan.
-    - Kulujen kokonaissumma :white_check_mark:
-    - Kategoriakohtainen jakautuminen (ruoka, asuminen, vapaa-aika jne.)
-- Käyttäjä voi poistaa olemassa olevia kuluja. :white_check_mark:
-- Käyttäjä voi muokata  olemassa olevia kuluja. :white_check_mark:
+- Käyttäjä näkee listan omista kuluistaan.
+- Käyttäjä näkee kulujensa summan.
+- Käyttäjä voi lisätä uuden kulun. 
+- Käyttäjä voi poistaa olemassa olevia kuluja.
+- Käyttäjä voi muokata olemassa olevia kuluja.
+- Käyttäjä voi suodattaa kuluja päivämäärän perusteella.
 
-## Jatkokehitysideoita
-- Kulujen suodatus perusteella. :white_check_mark:
-- Kulujen esimerkiksi kategorian perusteella.
-- Käyttäjä voi asetttaa budjetin eri kulukategorioille ja nähdä, kuinka paljon rahaa on vielä käytettävissä.
+### Jatkokehitysideoita
+- Kulujen suodautus kategorian perusteella.
 - Visuaaliset kaaviot kulutuksen jakautumisesta eri kategorioihin.
-
+- Käyttäjä voi asetttaa budjetin eri kulukategorioille ja nähdä, kuinka paljon rahaa on vielä käytettävissä.
