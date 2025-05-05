@@ -70,7 +70,7 @@ class ExpenseRepository:
 
         expenses = self.expenses_by_user(user)
 
-        expenses["Date"] = pd.to_datetime(expenses["Date"], errors="coerce")
+        expenses["Date"] = pd.to_datetime(expenses["Date"], format="mixed")
         expenses.set_index("Date", inplace=True)
 
         mask = (expenses.index >= from_date) & (expenses.index <= to_date)
