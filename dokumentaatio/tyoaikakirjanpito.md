@@ -18,4 +18,6 @@
 |     |   1.5  | Docstring | 
 |  3.5 |   0.5  | Lisäsin kulujen kokonaissumman näkymään. | 
 |   |   2  | Toteutin kulujen suodatuksen päivämäärien perusteella. | 
-| Yhteensä   | 23  | |
+| 5.5  |  2   | Testaus ja testausdokumentti | 
+| 6.5  |  0.5   | Toteutin salasanojen salaamisen | 
+| Yhteensä   | 25.5  | |
