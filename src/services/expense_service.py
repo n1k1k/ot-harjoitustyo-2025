@@ -1,3 +1,4 @@
+from werkzeug.security import check_password_hash, generate_password_hash
 from entities.user import User
 
 from repositories.user_repository import user_repository as default_user_repository
@@ -170,8 +171,8 @@ class ExpenseService:
         if not user:
             raise UserNotFoundError("User not found")
 
-        if user.password != password:
-            raise AuthenticationError("Passwords do not match")
+        if not check_password_hash(user.password, password):
+            raise AuthenticationError("Wrong password")
 
         self._user = user
 
@@ -205,7 +206,8 @@ class ExpenseService:
         if check_username:
             raise UsernameExistsError(f"Username {username} is already taken")
 
-        user = self._user_repository.create_user(User(username, password))
+        password_hash = password_hash = generate_password_hash(password, "scrypt")
+        user = self._user_repository.create_user(User(username, password_hash))
         self._user = user
 
         return user
