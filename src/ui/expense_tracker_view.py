@@ -388,7 +388,7 @@ class ExpenseTrackerView:
 
         expense_total = ttk.Label(
             self._frame,
-            text=f" Total: {self._sum}",
+            text=f" Total: {self._sum:.2f}",
             background="lightgray",
             foreground="black",
         )
