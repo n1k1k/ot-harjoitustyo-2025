@@ -12,15 +12,11 @@ class UsernameExistsError(Exception):
     Raised if the username already exists, when attempting to create a new user.
     """
 
-    pass
-
 
 class DeleteError(Exception):
     """
     Raised when an expense record cannot be deleted.
     """
-
-    pass
 
 
 class AuthenticationError(Exception):
@@ -28,15 +24,11 @@ class AuthenticationError(Exception):
     Raised when the give password does not match the password in the database.
     """
 
-    pass
-
 
 class UserNotFoundError(Exception):
     """
     Raised when the given username is not found in the database.
     """
-
-    pass
 
 
 class ExpenseService:
@@ -89,7 +81,7 @@ class ExpenseService:
         Filters the expenses of the currently logged-in user based on the given dates.
 
         Args:
-            from_date: Beginning date.Can be str or Pandas timestamp object.
+            from_date: Beginning date. Can be str or Pandas timestamp object.
             to_date: End date. Can be str or Pandas timestamp object.
 
         Returns:
@@ -98,11 +90,13 @@ class ExpenseService:
         """
 
         user = self.get_current_user()
-        expenses, sum = self._expense_repository.expenses_by_user_filtered_by_date(
-            user, from_date, to_date
+        expenses, expense_sum = (
+            self._expense_repository.expenses_by_user_filtered_by_date(
+                user, from_date, to_date
+            )
         )
 
-        return (expenses, sum)
+        return (expenses, expense_sum)
 
     def get_expense_sum(self):
         """
@@ -124,7 +118,6 @@ class ExpenseService:
             date: Date of the expense.
             category: Description (category) of the expense.
             amount: Amount spent.
-
 
         Returns:
             The created expense

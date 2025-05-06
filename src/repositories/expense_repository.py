@@ -27,7 +27,12 @@ class ExpenseRepository:
         try:
             df = pd.read_csv(self._file_path)
             df = df.sort_values(by="Date", ascending=False)
-        except Exception:
+        except (
+            FileNotFoundError,
+            pd.errors.EmptyDataError,
+            pd.errors.ParserError,
+            KeyError,
+        ):
             data = {"Date": [], "Description": [], "Amount": [], "User": []}
 
             df = pd.DataFrame(data)
@@ -79,9 +84,9 @@ class ExpenseRepository:
         filtered_expenses = filtered_expenses.reset_index()
         filtered_expenses["Date"] = filtered_expenses["Date"].dt.strftime(r"%Y-%m-%d")
 
-        sum = filtered_expenses.Amount.sum()
+        expense_sum = filtered_expenses.Amount.sum()
 
-        return (filtered_expenses, sum)
+        return (filtered_expenses, expense_sum)
 
     def expense_sum(self, user):
         """
