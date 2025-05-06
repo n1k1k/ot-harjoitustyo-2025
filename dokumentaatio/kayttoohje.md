@@ -61,7 +61,7 @@ Kulun päivämäärän oletusarvo on nykyinne päivämäärä ja se tulee antaa 
 
 Kulu lisätään painamalla “Add Expense” painiketta. Tällöin kulu ilmestyy listausnäkymään:
 
-![](./images/expense_tracker_2.png)
+![](./images/new_expense.png)
 
 ### Kulujen poistaminen ja muokkaaminen
 
@@ -69,11 +69,21 @@ Jos kulua haluaa muokata tai jos sen haluaa poistaa, tulee se ensin valita klikk
 
 ![](./images/select.png)
 
-Valitun kulun voi poistaa painamalla punaista “Delete” painiketta. Kulua voi muokata painamalla keltaista “Edit” painiketta, jolloin avautuu uusi ikkuna, jossa kulua voi muokata samaan tapaan kuin uuden kulun luomisessa.
+
+Valitun kulun voi poistaa painamalla punaista “Delete” painiketta. Kulua voi muokata painamalla keltaista “Edit” painiketta, jolloin avautuu uusi ikkuna, jossa kulua voi muokata samaan tapaan kuin uuden kulun luomisessa:
+
+![](./images/edit_expense.png)
 
 ### Kulujen suodattaminen päivämäärän perusteella
 
-Kuluja voi suodattaa antamalla From -kenttään alkupäivämäärän ja To-kenttään loppupäivämäärän ja painamalla "apply" painiketta. Molempien kenttien oletusarvona on nykyinen päivämäärä. Oletusarvoa käytetään, jos kenttiin ei syötä mitään. Suodatuksen voi nollata painamalla "clear" painiketta. 
+Kuluja voi suodattaa antamalla From -kenttään alkupäivämäärän ja To-kenttään loppupäivämäärän ja painamalla "apply" painiketta. Kun painiketta on painettu näytetään listassa vain annettujen päivämäärien rajoissa olevat kulut:
+
+![](./images/filter.png)
+
+Molempien kenttien oletusarvona on nykyinen päivämäärä. Oletusarvoa käytetään, jos kenttiin ei syötä mitään. Jos päivämäärä antaa väärin päin, eli "To" päivämäärä on ennen "From" päivämäärä, näyttä Expense Tracker tyhjän listan.
+
+Suodatuksen voi nollata painamalla "clear" painiketta. 
+
 
 ### Uloskirjautuminen
 
