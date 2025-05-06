@@ -44,7 +44,6 @@ class CreateUserView:
         else:
             try:
                 user = expense_service.create_user(username, password)
-                expense_service.login(user.username, user.password)
                 self._expense_tracker_view()
             except UsernameExistsError:
                 messagebox.showerror("Error", f'Username "{username}" is already taken')
