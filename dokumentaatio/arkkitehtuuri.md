@@ -34,13 +34,19 @@ Yllä mainitut näkymät ovat toteutettu omina luokkinaan. Uusien kulujen lisä�
 
 ## Tiedon pysyväistallennus
 
-Tietojen tallennuksesta vastaavat UserRepository ja ExpenseRepository luokat. UserRepository tallentaa käyttäjien tunnukset oletuksena database nimiseen SQLite-tietokantaan users nimiseen tauluun. ExpenseRepository tallentaa kulut oletuksena expenses.csv nimiseen CSV-tiedostoon. Kulut on tallennettu tiedostoon seuraavassa muodossa:
+Tietojen tallennuksesta vastaavat `UserRepository` ja `ExpenseRepository` luokat. `UserRepository` tallentaa käyttäjien tunnukset oletuksena database nimiseen SQLite-tietokantaan `users` nimiseen tauluun. `ExpenseRepository` tallentaa kulut oletuksena expenses.csv nimiseen CSV-tiedostoon. Kulut on tallennettu tiedostoon seuraavassa muodossa:
 
 ```
 2025-04-28,Transportation,2.9,Matti
 2025-04-25,Groceries,34.6,Matti
 ```
 Eli päivämäärä, kategoria, rahamäärä ja käyttäjän käyttäjänimi eroteltuna pilkulla (,).
+
+Tallennukseen käytettävien tiedostojen nimet on konfiguroitu .env tiedostoon seuraavasti:
+```
+DATABASE_FILENAME=database.sqlite
+EXPENSES_FILENAME=expenses.csv
+```
 
 <br /> 
 
@@ -61,12 +67,16 @@ sequenceDiagram
   UI->>ExpenseService: create_user("SpongeBob", "bob123")
   ExpenseService->>UserRepository: find_by_username("SpongeBob")
   UserRepository-->>ExpenseService: None
-  ExpenseService->>spongebob: User("SpongeBob", "bob123")
-  ExpenseService->>UserRepository: create_user(spongebob)
+  ExpenseService->> ExpenseService: generate_password_hash("bob123")
+  ExpenseService->>spongebob: User("SpongeBob", password_hash)
+  ExpenseService->>UserRepository: create_user(Spongebob)
   UserRepository-->>ExpenseService: user
   ExpenseService-->>UI: user
-  UI -->> ExpenseService: login(user.username, user.password)
+  UI-->>UI: show_expense_tracker_view()
 ```
+Käyttöliittymä kutsuu `ExpenseService` luokan metodia [create_user](https://github.com/n1k1k/ot-harjoitustyo-2025/blob/d66631ca53ce37b94549ab3b1a4915934b62772e/src/repositories/user_repository.py#L20) `ExpenseService` tarkistaa ensin, onko käyttäjänimi jo käytössä, kutsumalla `UserReposetory` luokan metodia [find_by_username](https://github.com/n1k1k/ot-harjoitustyo-2025/blob/d66631ca53ce37b94549ab3b1a4915934b62772e/src/repositories/user_repository.py#L42) `UserRepository` palauttaa `None`, eli käyttäjätunnus on vapaa.  `ExpenseService` luo uuden käyttäjäolion joka sisältää annetun käyttäjänimen ja salatun salasanan. Salasan salataan [Werkzeug](https://pypi.org/project/Werkzeug/) kirjaston metodilla `generate_password_hash`. 
+Tämän jälkeen `ExpenseService` lisää käyttäjän tietokantaan käyttäen `UserRepository` luokan metodia 
+[create_user](https://github.com/n1k1k/ot-harjoitustyo-2025/blob/d66631ca53ce37b94549ab3b1a4915934b62772e/src/repositories/user_repository.py#L20), jolle annetaan parametriksi äsken luotu käyttäjäolio. `UserRepository` palauttaa tallennetun käyttäjän takaisin ExpenseService-palvelulle. Lopuksi  `ExpenseService` palauttaa käyttäjäolion käyttöliittymälle (UI), joka voi siirtyä seuraavaan näkymään. Lopuksi käyttöliittymä vaihtaa näkymän sovelluksen päänäkymään.
 
 <br /> 
 
@@ -82,9 +92,11 @@ sequenceDiagram
   UI->>ExpenseService: login("SpongeBob", "bob123")
   ExpenseService->>UserRepository: find_by_username("SpongeBob")
   UserRepository-->>ExpenseService: user
+  ExpenseService->>ExpenseService: check_password_hash(user.password, "bob123")
   ExpenseService-->>UI: user
-  UI->UI: show_expense_tracker_view()
+  UI->>UI: show_expense_tracker_view()
   ```
+Käyttöliittymä kutsuu  `ExpenseService` luokan metodia [login](https://github.com/n1k1k/ot-harjoitustyo-2025/blob/d66631ca53ce37b94549ab3b1a4915934b62772e/src/services/expense_service.py#L150). `ExpenseService` kysyy käyttäjätietoja  `UserRepository` luokalta kutsumalla metodia [find_by_username](https://github.com/n1k1k/ot-harjoitustyo-2025/blob/d66631ca53ce37b94549ab3b1a4915934b62772e/src/repositories/user_repository.py#L42). `UserRepository` repositorio palauttaa käyttäjäolion takaisin `ExpenseService` luokalle, jonka jälkeen `ExpenseService` tarkistaa vastaako käyttäjän antama salasana `UserRepository`:ta saatua salattua salasanaa. Tämä tapahtuu [Werkzeug](https://pypi.org/project/Werkzeug/) kirjaston metodilla `check_password_hash`. Tämän jälkeen `ExpenseService` palauttaa käyttäjäolion käyttöliittymälle. Lopuksi käyttöliittymä vaihtaa näkymän sovelluksen päänäkymään.
 
 <br /> 
 
@@ -105,4 +117,29 @@ sequenceDiagram
     ExpenseService->>ExpenseRepository: get_expenses_by_user(User)
     ExpenseRepository -->> ExpenseService: expenses
     ExpenseService -->> UI: expenses
+    UI ->> UI: change_expense_records()
 ```
+<br /> 
+
+Käyttöliittymä kutsuu `ExpenseService` luokan metodia [create_expense](https://github.com/n1k1k/ot-harjoitustyo-2025/blob/d66631ca53ce37b94549ab3b1a4915934b62772e/src/services/expense_service.py#L114). Parametreina annetaan kulun päivämäärä, kategoria ja summa. `ExpenseService` kutsuu `ExpenseRepository` luokan metodia  [add_expense]() joka huolehtii kulun tallentamisesta. Käyttöliittymä pyytää tämän jälkeen kaikki kulut, mukaanlukien äsken luotu uusi kulu, `ExpenseService` luokalta. `ExpenseService` välittää pyynnön `ExpenseRepository` luokalle, joka antaa kulut `ExpenseService` luokalle, joka puolestaa välittää ne käyttöliittymälle. Lopuksi käyttöliittymä päivittää näkymän.
+
+### Kulujen suodattaminen päivämäärän perusteella
+
+"From" ja "To" kenttiin päivämäärien syöttämisen ja "Apply" painikkeen likkaamisen seurauksena tapahtuva sovelluksen toimintalogiikka sekvenssikaaviona:
+
+```mermaid
+sequenceDiagram
+    actor User
+    User->>UI:Input dates and click button "Apply"
+    UI->> ExpenseService: get_expenses_filtered_by_date("12-04-2025", "06-05-2025")
+    ExpenseService->>ExpenseRepository: expenses_by_user_filtered_by_date(User, "12-04-2025", "06-05-2025")
+    ExpenseRepository ->> ExpenseRepository: expenses_by_user(User)
+    ExpenseRepository -->> ExpenseService: expenses
+    ExpenseService -->> UI: expenses
+    UI ->> UI: initialise()
+```
+
+Käyttöliittymä kutsuu `ExpenseService` luokan metodia [get_expenses_filtered_by_date](). `ExpenseService` luokka pyytää suodatetu kulut `ExpenseRepository` luokalta. ExpenseRepository hakee ensin `ExpenseService` luokan antaman käyttäjän kulut ja sen jälkeen suodattaa ne annettujen päivämäärien perusteella. `ExpenseRepository` palauttaa suodatetu kulut `ExpenseService` luokalle, joka välittä ne käyttöliittymälle. Lopuksi käyttöliittymä päivittää näkymän.
+
+
+
