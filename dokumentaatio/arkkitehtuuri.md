@@ -37,10 +37,11 @@ Yllä mainitut näkymät ovat toteutettu omina luokkinaan. Uusien kulujen lisä�
 Tietojen tallennuksesta vastaavat `UserRepository` ja `ExpenseRepository` luokat. `UserRepository` tallentaa käyttäjien tunnukset oletuksena database nimiseen SQLite-tietokantaan `users` nimiseen tauluun. `ExpenseRepository` tallentaa kulut oletuksena expenses.csv nimiseen CSV-tiedostoon. Kulut on tallennettu tiedostoon seuraavassa muodossa:
 
 ```
+Date, Description, Amount, User
 2025-04-28,Transportation,2.9,Matti
 2025-04-25,Groceries,34.6,Matti
 ```
-Eli päivämäärä, kategoria, rahamäärä ja käyttäjän käyttäjänimi eroteltuna pilkulla (,).
+Eli päivämäärä, kategoria, rahamäärä ja käyttäjän käyttäjänimi eroteltuna pilkulla (,). Tämän lisäki tiedoston ylin rivi sisältää sarakkaiden nimet "Date", "Description", "Amount" ja "User".
 
 Tallennukseen käytettävien tiedostojen nimet on konfiguroitu .env tiedostoon seuraavasti:
 ```
