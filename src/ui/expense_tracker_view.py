@@ -146,6 +146,9 @@ class ExpenseTrackerView:
         self._to_date_entry.set_date(to_date)
 
     def _add_expense_window(self):
+        if self._toplevel:
+            self._toplevel.destroy()
+
         self._toplevel = Toplevel(self._root)
         self._toplevel.geometry("340x250")
         self._toplevel.config(bg="#333333")
@@ -220,6 +223,9 @@ class ExpenseTrackerView:
         add_expense_button.grid(row=3, column=0, columnspan=2, pady=(40, 20))
 
     def _edit_expense_window(self, date, category, amount):
+        if self._toplevel:
+            self._toplevel.destroy()
+
         self._toplevel = Toplevel(self._root)
         self._toplevel.geometry("340x250")
         self._toplevel.config(bg="#333333")
