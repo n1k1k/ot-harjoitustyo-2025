@@ -20,5 +20,5 @@
 |   |   2  | Toteutin kulujen suodatuksen päivämäärien perusteella. | 
 | 5.5  |  2   | Testaus ja testausdokumentti | 
 | 6.5  |  0.5   | Toteutin salasanojen salaamisen | 
-|   |  1   | Arkkitehtuurikuvaus | 
+|   |  1.5   | Viimeistelin arkkitehtuurikuvauksen, testausdokumentin ja käyttöohjeen. | 
 | Yhteensä   | 26.5  | |
