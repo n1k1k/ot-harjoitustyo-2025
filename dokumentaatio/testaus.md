@@ -21,7 +21,7 @@ Testien haarautumakattavuus on 86%. Haarautumakattavuuden ulkopuolelle on jätet
 
 ## Järjestelmätestaus
 
-Sovellusta on testattu järjestelmätasolla manuaalisesti.
+Sovellusta on testattu järjestelmätasolla manuaalisesti Linux-ympätistössä. 
 
 ### Sovelluksen toiminnallisuus
 
