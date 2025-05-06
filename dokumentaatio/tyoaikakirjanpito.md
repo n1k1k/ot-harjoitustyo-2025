@@ -19,6 +19,6 @@
 |  3.5 |   0.5  | Lisäsin kulujen kokonaissumman näkymään. | 
 |   |   2  | Toteutin kulujen suodatuksen päivämäärien perusteella. | 
 | 5.5  |  2   | Testaus ja testausdokumentti | 
-| 6.5  |  0.5   | Toteutin salasanojen salaamisen | 
+| 6.5  |  0.5   | Toteutin salasanojen salaamisen ja korjasin pienet testauksessa löytyneett bugit. | 
 |   |  1.5   | Viimeistelin arkkitehtuurikuvauksen, testausdokumentin ja käyttöohjeen. | 
-| Yhteensä   | 26.5  | |
+| Yhteensä   | 27  | |
