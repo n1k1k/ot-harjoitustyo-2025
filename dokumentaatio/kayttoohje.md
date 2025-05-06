@@ -1,14 +1,18 @@
 # Käyttöohje
 
-## Konfigurointi
+## Asennus
 
-Sovellus luo automaattisesti talennukseen käytettävät tiedostot data-hakemistoon. Tiedostojen nimiä voi halutessaan muttaa muokkaamalla käynnistyshakemistossa olevaa .env tiedostoa. Tiedoston muodon tulee olla seuraava:
+Lataa sovelluksen viimeisimmän [releasen](https://github.com/n1k1k/ot-harjoitustyo-2025/releases) lähdekoodi.
+
+### Konfigurointi
+
+Sovellus luo automaattisesti tallennukseen käytettävät tiedostot data-hakemistoon. Tiedostojen nimiä voi halutessaan muttaa muokkaamalla käynnistyshakemistossa olevaa .env tiedostoa. Tiedoston muodon tulee olla seuraava:
 ```
 DATABASE_FILENAME= <tiedoston nimi>.sqlite
 EXPENSES_FILENAME= <tiedoston nimi>.csv
 ```
 
-## Sovelluksen käynnistys
+### Sovelluksen käynnistys
 Ennen kuin sovelluksen käynnistää ensimmäisen kerran tulee asentaa sovelluksen riippuvuudet komennolla:
 ```
 poetry install
@@ -69,7 +73,7 @@ Valitun kulun voi poistaa painamalla punaista “Delete” painiketta. Kulua voi
 
 ### Kulujen suodattaminen päivämäärän perusteella
 
-Kuluja voi suodattaa antamalla From -kenttään alkupäivämäärän ja To-kenttään loppupäivämäärän ja painamalla "apply" painiketta. Molempien kenttien oletusarvona on nykyinen päivämäärä. Suodatuksen voi nollata painamalla "clear" painiketta.
+Kuluja voi suodattaa antamalla From -kenttään alkupäivämäärän ja To-kenttään loppupäivämäärän ja painamalla "apply" painiketta. Molempien kenttien oletusarvona on nykyinen päivämäärä. Oletusarvoa käytetään, jos kenttiin ei syötä mitään. Suodatuksen voi nollata painamalla "clear" painiketta. 
 
 ### Uloskirjautuminen
 
