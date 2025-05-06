@@ -120,9 +120,10 @@ sequenceDiagram
     ExpenseService -->> UI: expenses
     UI ->> UI: change_expense_records()
 ```
-<br /> 
 
 Käyttöliittymä kutsuu `ExpenseService` luokan metodia [create_expense](https://github.com/n1k1k/ot-harjoitustyo-2025/blob/d66631ca53ce37b94549ab3b1a4915934b62772e/src/services/expense_service.py#L114). Parametreina annetaan kulun päivämäärä, kategoria ja summa. `ExpenseService` kutsuu `ExpenseRepository` luokan metodia  [add_expense]() joka huolehtii kulun tallentamisesta. Käyttöliittymä pyytää tämän jälkeen kaikki kulut, mukaanlukien äsken luotu uusi kulu, `ExpenseService` luokalta. `ExpenseService` välittää pyynnön `ExpenseRepository` luokalle, joka antaa kulut `ExpenseService` luokalle, joka puolestaa välittää ne käyttöliittymälle. Lopuksi käyttöliittymä päivittää näkymän.
+
+<br /> 
 
 ### Kulujen suodattaminen päivämäärän perusteella
 
