@@ -18,6 +18,7 @@ Sovellus mahdollistaa käyttäjälle omien kulujensa seurannan ja hallinnan. Rek
 <br/>
 
 ## Releases
+  - [Loppupalautus](https://github.com/n1k1k/ot-harjoitustyo-2025/releases/tag/loppupalautus)
   - [Viikko 6](https://github.com/n1k1k/ot-harjoitustyo-2025/releases/tag/viikko6)
   - [Viikko 5](https://github.com/n1k1k/ot-harjoitustyo-2025/releases/tag/viikko5)
 
