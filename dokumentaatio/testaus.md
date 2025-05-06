@@ -15,7 +15,7 @@ EXPENSES_FILENAME=expenses_test.csv
 
 ### Testien haarautumakattavuus 
 
-Testien haarautumakattavuus on 86%. Haarautumakattavuuden ulkopuolelle on jätetty käyttöliittymä. 
+Testien haarautumakattavuus on 92%. Haarautumakattavuuden ulkopuolelle on jätetty käyttöliittymä. 
 
 ![](./images/testcoverage.png)
 
